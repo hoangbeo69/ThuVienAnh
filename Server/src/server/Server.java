@@ -31,6 +31,7 @@ public class Server {
             System.out.println("Server is running on port : " +PORT);
             while(true){
             Socket socket = server.accept();
+                System.out.println("Connecing with "+socket.getRemoteSocketAddress().toString());
             new ServerWorkThread(socket).start();
             }
         } catch (IOException ex) {
