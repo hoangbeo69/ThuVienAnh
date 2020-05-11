@@ -27,6 +27,7 @@ class ServerDB {
                 id  = rs.getString("id");
             }
         } catch (Exception e) {
+            return id;
         } finally {
             connection.closeConnect();
         }

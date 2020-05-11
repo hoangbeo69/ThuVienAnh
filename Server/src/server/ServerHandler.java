@@ -60,7 +60,6 @@ public class ServerHandler {
     }
 
     public void dangNhap() {
-
         DangNhapBus dangNhap = new DangNhapBus(socket);
         if (dangNhap.getDulieu()) {
             dangNhap.traDulieu();

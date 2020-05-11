@@ -55,7 +55,7 @@ public class ConnectionDB {
 
         } catch (SQLException e) {
             System.err.println("-- ERROR! Không thể kết nối tới '" + DB_Name + "'");
-            JOptionPane.showMessageDialog(null, "-- ERROR! Không thể kết nối tới '" + DB_Name + "'");
+//            JOptionPane.showMessageDialog(null, "-- ERROR! Không thể kết nối tới '" + DB_Name + "'");
         }
     }
 
@@ -97,13 +97,13 @@ public class ConnectionDB {
             }
             System.out.println("Success! Đóng kết nối tới '" + DB_Name + "' thành công.\n**");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "-- ERROR! Không thể đóng kết nối tới " + DB_Name + "\n" + ex.getLocalizedMessage());
+//            JOptionPane.showMessageDialog(null, "-- ERROR! Không thể đóng kết nối tới " + DB_Name + "\n" + ex.getLocalizedMessage());
         }
     }
 
     public Boolean checkConnect() {
         if (conn == null || stmt == null) {
-            JOptionPane.showMessageDialog(null, "-- ERROR! Chưa thiết lập kết nối tới '" + DB_Name + "'. Vui lòng đăng nhập để thiết lập kết nối!");
+//           JOptionPane.showMessageDialog(null, "-- ERROR! Chưa thiết lập kết nối tới '" + DB_Name + "'. Vui lòng đăng nhập để thiết lập kết nối!");
             return false;
         }
         return true;
