@@ -12,6 +12,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import keeptoo.KTextField;
+import BackEndClass.HinhAnh;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,53 +24,42 @@ public class MainControl extends javax.swing.JFrame {
     /**
      * Creates new form MainControl
      */
-    public MainControl() {
+    public Client client;
+    private ArrayList<HinhAnh> danhSachAnh;
+
+    public MainControl(Client client, String taiKhoan, String id) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
         this.setUndecorated(true);
         this.setSize(1315, 760);
-        initComponents();
-
-//        JPanel panel1 = new JPanel();
-//        panel1.setSize(273, 245);
-//        panel1.setBackground(Color.red);
-//        JLabel label1 = new JLabel();
-//        label1.setIcon(new ImageIcon("/image/2608278.jpg"));
-//        label1.setBounds(0, 0, panel1.getWidth(), 190);
-//        panel1.add(label1);
-//        panel1.setOpaque(false);
-//        panelHinhAnh.add(panel1);
-//        keeptoo.KGradientPanel kGradientPanel2 = new keeptoo.KGradientPanel();
-//        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-//        JLabel  lbDate = new JLabel();
-//        JLabel lbDownLoad = new JLabel();
-//        JLabel  lbHinhAnh = new JLabel();
-//        JLabel lbTenAnh = new JLabel();
-//                kGradientPanel2.setkBorderRadius(0);
-//        kGradientPanel2.setkEndColor(new java.awt.Color(71,74,81));
-//        kGradientPanel2.setkStartColor(new java.awt.Color(71,74,81));
-//        kGradientPanel2.setMinimumSize(new java.awt.Dimension(273, 237));
-//        kGradientPanel2.setPreferredSize(new java.awt.Dimension(273, 237));
-//        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-//        
-//        
-//        
-//        lbDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-//        lbDate.setText("20/11/2020");
-//        lbDate.setForeground(new Color(142,144,149));
-//        kGradientPanel2.add(lbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 220, 30));
-//
-//        lbDownLoad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/download_35px.png"))); // NOI18N
-//        kGradientPanel2.add(lbDownLoad, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 0, 40, 40));
-//
-//        lbHinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/2608782.jpg"))); // NOI18N
-//        lbHinhAnh.setText("jLabel1");
-//        kGradientPanel2.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
-//
-//        lbTenAnh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-//        lbTenAnh.setText("Hinhanh.jpg");
-//        lbTenAnh.setForeground(new Color(142,144,149));
-//        kGradientPanel2.add(lbTenAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 210, 31));
-        
-        HinhAnhPanel ava = new HinhAnhPanel("3","3","4","5");
+        this.initComponents();
+        danhSachAnh = client.getDanhSachAnh(id);
+        for (HinhAnh ha : danhSachAnh) {
+            System.out.println(ha.toString());
+        }
+//////////////////////////////////////////////////////////////////////////////
+        HinhAnhPanel ava = new HinhAnhPanel("3", "3", "4", "5");
 //        ava.setImageDisplay(new ImageIcon("imageDemo/55992c240315323aef3cfc264274970d.jpg"));
         panelHinhAnh.add(ava);
         this.validate();
@@ -107,8 +98,8 @@ public class MainControl extends javax.swing.JFrame {
         panel8.setSize(273, 245);
         panel8.setBackground(Color.blue);
         panelHinhAnh.add(panel8);
-        ImageIcon img = new ImageIcon(getClass().getResource("/imageDemo/55992c240315323aef3cfc264274970d.jpg"));
-        ava.setImageDisplay(img);
+//        ImageIcon img = new ImageIcon(getClass().getResource("/image/2608782.jpg"));
+//        ava.setImageDisplay(img);
     }
 
     /**
@@ -122,6 +113,9 @@ public class MainControl extends javax.swing.JFrame {
 
         panelHead = new javax.swing.JPanel();
         kGradientPanel1 = new keeptoo.KGradientPanel();
+        lbTenTaiKhoan = new javax.swing.JLabel();
+        lbDungLuong = new javax.swing.JLabel();
+        btnChinhSua = new javax.swing.JLabel();
         lbBackground = new javax.swing.JLabel();
         panelNextPage = new javax.swing.JPanel();
         panelFunction = new javax.swing.JPanel();
@@ -154,6 +148,16 @@ public class MainControl extends javax.swing.JFrame {
         );
 
         panelHead.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 120, 120));
+
+        lbTenTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 26)); // NOI18N
+        lbTenTaiKhoan.setForeground(new java.awt.Color(204, 204, 204));
+        lbTenTaiKhoan.setText("Hoangbeo69");
+        panelHead.add(lbTenTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, 200, 50));
+
+        lbDungLuong.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbDungLuong.setText("Dung lượng còn trống 15%");
+        panelHead.add(lbDungLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, 30));
+        panelHead.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 30, 30));
 
         lbBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/CoverPage.png"))); // NOI18N
         panelHead.add(lbBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1315, 135));
@@ -203,7 +207,7 @@ public class MainControl extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -226,22 +230,24 @@ public class MainControl extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainControl().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                MainControl main = new MainControl().setVisible(true);
+//            }
+//        });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnChinhSua;
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private javax.swing.JLabel lbBackground;
+    private javax.swing.JLabel lbDungLuong;
+    private javax.swing.JLabel lbTenTaiKhoan;
     private javax.swing.JPanel panelFunction;
     private javax.swing.JPanel panelHead;
     private javax.swing.JPanel panelHinhAnh;
     private javax.swing.JPanel panelNextPage;
     // End of variables declaration//GEN-END:variables
+
 }

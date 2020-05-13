@@ -5,6 +5,8 @@
  */
 package server;
 
+import ServerBUS.DangNhapBus;
+import ServerBUS.ListAnhBUS;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -61,8 +63,14 @@ public class ServerHandler {
 
     public void dangNhap() {
         DangNhapBus dangNhap = new DangNhapBus(socket);
-        if (dangNhap.getDulieu()) {
-            dangNhap.traDulieu();
+        if (dangNhap.layDuLieuClient()) {
+            dangNhap.traDulieuClient();
+        }
+    }
+    public void guiListAnh(){
+        ListAnhBUS listAnh = new ListAnhBUS(socket);
+        if(listAnh.layDuLieuClient()){
+            listAnh.traDuLieuClient();
         }
     }
 }
