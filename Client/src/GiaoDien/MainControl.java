@@ -68,8 +68,10 @@ public class MainControl extends javax.swing.JFrame {
 //        lbTenAnh.setForeground(new Color(142,144,149));
 //        kGradientPanel2.add(lbTenAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 210, 31));
         
-        AvatarPanel ava = new AvatarPanel("3","3","4","5");
+        HinhAnhPanel ava = new HinhAnhPanel("3","3","4","5");
+//        ava.setImageDisplay(new ImageIcon("imageDemo/55992c240315323aef3cfc264274970d.jpg"));
         panelHinhAnh.add(ava);
+        this.validate();
 
         JPanel panel2 = new JPanel();
         panel2.setSize(273, 245);
@@ -105,7 +107,8 @@ public class MainControl extends javax.swing.JFrame {
         panel8.setSize(273, 245);
         panel8.setBackground(Color.blue);
         panelHinhAnh.add(panel8);
-
+        ImageIcon img = new ImageIcon(getClass().getResource("/imageDemo/55992c240315323aef3cfc264274970d.jpg"));
+        ava.setImageDisplay(img);
     }
 
     /**
@@ -152,7 +155,7 @@ public class MainControl extends javax.swing.JFrame {
 
         panelHead.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 120, 120));
 
-        lbBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/SzQGbZV_d.jpg"))); // NOI18N
+        lbBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/CoverPage.png"))); // NOI18N
         panelHead.add(lbBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1315, 135));
 
         getContentPane().add(panelHead, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1315, 135));

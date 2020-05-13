@@ -49,7 +49,6 @@ public class DangNhapForm extends javax.swing.JFrame {
         lbTaiKhoan = new javax.swing.JLabel();
         lbMatKhau = new javax.swing.JLabel();
         tfMatKhau = new javax.swing.JPasswordField();
-        jToggleButton1 = new javax.swing.JToggleButton();
         tfTaiKhoan = new javax.swing.JTextField();
         btnClose = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JLabel();
@@ -57,8 +56,9 @@ public class DangNhapForm extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         lbThongBaoDangNhap = new javax.swing.JLabel();
         lbDangKyTaiKhoan = new javax.swing.JLabel();
+        btnDangNhap = new keeptoo.KGradientPanel();
+        lbDangNhap = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -79,20 +79,8 @@ public class DangNhapForm extends javax.swing.JFrame {
         tfMatKhau.setForeground(new java.awt.Color(51, 51, 51));
         tfMatKhau.setText("jPassword");
         tfMatKhau.setBorder(null);
-        tfMatKhau.setNextFocusableComponent(jToggleButton1);
         tfMatKhau.setOpaque(false);
         getContentPane().add(tfMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 290, 40));
-
-        jToggleButton1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jToggleButton1.setText("Đăng Nhập");
-        jToggleButton1.setToolTipText("");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 140, 50));
 
         tfTaiKhoan.setBackground(new java.awt.Color(51, 51, 51));
         tfTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -139,9 +127,9 @@ public class DangNhapForm extends javax.swing.JFrame {
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 290, 10));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 290, -1));
 
-        lbThongBaoDangNhap.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lbThongBaoDangNhap.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
         lbThongBaoDangNhap.setForeground(new java.awt.Color(255, 51, 51));
-        getContentPane().add(lbThongBaoDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 330, 40));
+        getContentPane().add(lbThongBaoDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 280, 330, 40));
 
         lbDangKyTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lbDangKyTaiKhoan.setForeground(new java.awt.Color(102, 102, 102));
@@ -159,45 +147,65 @@ public class DangNhapForm extends javax.swing.JFrame {
         });
         getContentPane().add(lbDangKyTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 260, 150, 30));
 
+        btnDangNhap.setBackground(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setToolTipText("");
+        btnDangNhap.setkBorderRadius(50);
+        btnDangNhap.setkEndColor(new java.awt.Color(255, 255, 255));
+        btnDangNhap.setkFillBackground(false);
+        btnDangNhap.setkGradientFocus(300);
+        btnDangNhap.setkStartColor(new java.awt.Color(102, 102, 102));
+        btnDangNhap.setkTransparentControls(false);
+        btnDangNhap.setOpaque(false);
+        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDangNhapMouseExited(evt);
+            }
+        });
+        btnDangNhap.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lbDangNhap.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        lbDangNhap.setForeground(new java.awt.Color(51, 51, 51));
+        lbDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbDangNhap.setText("Đăng Nhập");
+        btnDangNhap.add(lbDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, -4, 180, 60));
+
+        getContentPane().add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 340, 170, 50));
+
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\HiHi\\Desktop\\ThuVienAnh\\Client\\src\\image\\2608782.jpg")); // NOI18N
         jLabel3.setNextFocusableComponent(this);
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 540));
 
-        jLabel5.setText("jLabel5");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-        String taiKhoan = tfTaiKhoan.getText();
-        String matKhau = tfMatKhau.getText();
-        if (taiKhoan.equals("") || matKhau.equals("")) {
-            lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không được để trống");
-            this.validate();
-        } else {
-
-            this.setCursor(Cursor.WAIT_CURSOR);
-            String id = null;
-            if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {
-                this.setCursor(Cursor.DEFAULT_CURSOR);
-                lbThongBaoDangNhap.setText("");
-                System.out.println("Đăng Nhập Thành Công");
-                System.out.println(id);
-
-            } else {
-                this.setCursor(Cursor.DEFAULT_CURSOR);
-                tfMatKhau.setText("");
-                lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không chính xác");
-                this.validate();
-            }
-        }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
-
+//            String taiKhoan = tfTaiKhoan.getText();
+//        String matKhau = tfMatKhau.getText();
+//        if (taiKhoan.equals("") || matKhau.equals("")) {
+//            lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không được để trống");
+//            this.validate();
+//        } else {
+//
+//            this.setCursor(Cursor.WAIT_CURSOR);
+//            String id = null;
+//            if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {
+//                this.setCursor(Cursor.DEFAULT_CURSOR);
+//                lbThongBaoDangNhap.setText("");
+//                System.out.println("Đăng Nhập Thành Công");
+//                System.out.println(id);
+//
+//            } else {
+//                this.setCursor(Cursor.DEFAULT_CURSOR);
+//                tfMatKhau.setText("");
+//                lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không chính xác");
+//                this.validate();
+//            }
+//        }
     //sự kiện click vào thì thoát chương trình
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         // TODO add your handling code here:
@@ -253,6 +261,21 @@ public class DangNhapForm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lbDangKyTaiKhoanMouseClicked
 
+    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
+        // TODO add your handling code here:
+        btnDangNhap.setkFillBackground(true);
+        btnDangNhap.setkFillBackground(true);
+        lbDangNhap.setForeground(new Color(102, 102, 102));
+
+    }//GEN-LAST:event_btnDangNhapMouseEntered
+
+    private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited
+        // TODO add your handling code here:
+        btnDangNhap.setkFillBackground(false);
+        lbDangNhap.setForeground(new Color(51, 51, 51));
+
+    }//GEN-LAST:event_btnDangNhapMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -290,13 +313,13 @@ public class DangNhapForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnClose;
+    private keeptoo.KGradientPanel btnDangNhap;
     private javax.swing.JLabel btnMinimize;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lbDangKyTaiKhoan;
+    private javax.swing.JLabel lbDangNhap;
     private javax.swing.JLabel lbMatKhau;
     private javax.swing.JLabel lbTaiKhoan;
     private javax.swing.JLabel lbThongBaoDangNhap;
