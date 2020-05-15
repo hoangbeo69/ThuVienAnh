@@ -18,6 +18,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,7 +27,7 @@ import java.util.logging.Logger;
 public class Client {
 
     Socket socket;
-
+    String userID;
     public Client() {
         try {
             socket = new Socket("localhost", 5555);
@@ -52,6 +53,7 @@ public class Client {
         if (sendMessToServer("dang_nhap")) {
             String id = null;
             if ((id = new DangNhapConnection(socket, taiKhoan, matKhau).checkDangNhap()) != null) {
+                this.userID = id;
                 return id;
             }
             return null;
@@ -59,13 +61,13 @@ public class Client {
         return null;
     }
 
-    public ArrayList<HinhAnh> getDanhSachAnh(String id) {
+    public ArrayList<HinhAnh> getDanhSachAnh() {
         ArrayList<HinhAnh> dsha = null;
         if(sendMessToServer("gui_list_anh")){
         try {
             InputStream input = socket.getInputStream();
             OutputStream output = socket.getOutputStream();
-            ListHinhAnhData lha = new ListHinhAnhData(id, input, output);
+            ListHinhAnhData lha = new ListHinhAnhData(userID, input, output);
             if (lha.guiData()) {
                 dsha = lha.layData();
             }
@@ -75,5 +77,8 @@ public class Client {
         }
         }
         return dsha;
+    }
+    synchronized public ImageIcon getHinhAnh(String idAnh){
+        
     }
 }

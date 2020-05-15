@@ -30,9 +30,13 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     JLabel lbHinhAnh = new JLabel();
     JLabel lbTenAnh = new JLabel();
     JLabel lbXoaAnh = new JLabel();
+    private String idAnh ;
 
-    public HinhAnhPanel(String tenAnh, String dungLuong, String ngay, String gio) {
-
+    public String getIdAnh() {
+        return idAnh;
+    }
+    public HinhAnhPanel(String idAnh,String tenAnh, String dungLuong, String ngay) {
+        this.idAnh = idAnh;
         this.setkBorderRadius(0);
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setkEndColor(new java.awt.Color(71, 74, 81));
