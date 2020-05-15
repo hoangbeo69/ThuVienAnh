@@ -274,7 +274,6 @@ public class DangNhapForm extends javax.swing.JFrame {
             if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {
                 this.setCursor(Cursor.DEFAULT_CURSOR);
                 lbThongBaoDangNhap.setText("");
-                System.out.println("Đăng Nhập Thành Công");
                 final String idTaiKhoan = id;
                 java.awt.EventQueue.invokeLater(new Runnable() {
                     @Override

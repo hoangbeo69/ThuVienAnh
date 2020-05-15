@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.OutputStream;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,21 +24,20 @@ import java.util.logging.Logger;
  */
 public class ListHinhAnhData {
 
-    OutputStream output;
-    InputStream input;
     String id;
-
-    public ListHinhAnhData(String id, InputStream input, OutputStream output) {
+    DataInputStream inputStream;
+    DataOutputStream outputStream;
+    ObjectInputStream inputStreamObject;
+    Socket socket ;
+    public ListHinhAnhData(String id,Socket socket ) {
         this.id = id;
-        this.output = output;
-        this.input = input;
+        this.socket = socket;
     }
 
     public boolean guiData() {
         try {
-            DataOutputStream output = new DataOutputStream(this.output);
-            output.writeUTF(id);
-            output.flush();
+            outputStream = new DataOutputStream(socket.getOutputStream());
+            outputStream.writeUTF(id);
             return true;
         } catch (IOException ex) {
             Logger.getLogger(ListHinhAnhData.class.getName()).log(Level.SEVERE, null, ex);
@@ -49,16 +49,14 @@ public class ListHinhAnhData {
     public ArrayList<HinhAnh> layData() {
         ArrayList<HinhAnh> dsha = new ArrayList<HinhAnh>();
         try {
-            DataInputStream input = new DataInputStream(this.input);
-            int size = input.readInt();
-            System.out.println(size);
-            ObjectInputStream inputStream = new ObjectInputStream(this.input);
-            for (int count = 0; count < size; count++) {
+            inputStream = new DataInputStream(socket.getInputStream());
+            int size = inputStream.readInt();
+            inputStreamObject = new ObjectInputStream(socket.getInputStream());
+            for (int count = 0; count <= size; count++) {
                 byte[] byteRead = new byte[1024];
-                inputStream.read(byteRead, 0, byteRead.length);
+                inputStreamObject.read(byteRead, 0, byteRead.length);
                 String[] data = new String(byteRead).trim().split("\\$");
                 HinhAnh ha = new HinhAnh(data[0],data[1],data[2],data[3],data[4]);
-                System.out.println(ha.toString());
                 dsha.add(ha);
             }
             

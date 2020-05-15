@@ -30,6 +30,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     JLabel lbHinhAnh = new JLabel();
     JLabel lbTenAnh = new JLabel();
     JLabel lbXoaAnh = new JLabel();
+    private ImageIcon img;
     private String idAnh ;
 
     public String getIdAnh() {
@@ -47,7 +48,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
 
         lbDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/calendar_15px.png"))); // NOI18N
-        lbDate.setText("20/11/2020");
+        lbDate.setText(ngay);
         lbDate.setForeground(new Color(136, 138, 143));
         this.add(lbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 263, 30));
 
@@ -66,7 +67,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
 //        this.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
         lbTenAnh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbTenAnh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbTenAnh.setText("Hinhanh.jpg");
+        lbTenAnh.setText(tenAnh);
         lbTenAnh.setForeground(new Color(136, 138, 143));
         this.add(lbTenAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 263, 31));
 
@@ -175,12 +176,15 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     public void setImageDisplay(ImageIcon imageIcon) {
         int height = 180;
         int width = 273;
-        System.out.println(lbHinhAnh.getWidth());
+        this.img = imageIcon;
         Image img2 = imageIcon.getImage().getScaledInstance(273, 180, 1);
-        Image img = new javax.swing.ImageIcon(getClass().getResource("/imageDemo/65954627_1025536354316241_7630705637017518080_n.jpg")).getImage().getScaledInstance(273, 180, 1);
         lbHinhAnh.setIcon(new ImageIcon(img2));
         lbHinhAnh.setText("Image");
         this.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
     }
 
+    public ImageIcon getImg() {
+        return img;
+    }
+    
 }

@@ -6,11 +6,14 @@
 package GiaoDien;
 
 import BackEndClass.HinhAnh;
+import BackEndData.HinhAnhData;
 import BackEndData.ListHinhAnhData;
 import GiaoDien.DangNhap.DangNhapConnection;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -28,20 +31,21 @@ public class Client {
 
     Socket socket;
     String userID;
+    DataOutputStream outputStream;
     public Client() {
         try {
-            socket = new Socket("localhost", 5555);
+            this.socket = new Socket("localhost", 5555);
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     //hàm gửi yêu cầu tới server
-    public boolean sendMessToServer(String act) {
+    synchronized public boolean sendMessToServer(String act) {
         try {
-            DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
-
+            outputStream = new DataOutputStream(socket.getOutputStream());
             outputStream.writeUTF(act);
+            outputStream.flush();
             return true;
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -64,21 +68,23 @@ public class Client {
     public ArrayList<HinhAnh> getDanhSachAnh() {
         ArrayList<HinhAnh> dsha = null;
         if(sendMessToServer("gui_list_anh")){
-        try {
-            InputStream input = socket.getInputStream();
-            OutputStream output = socket.getOutputStream();
-            ListHinhAnhData lha = new ListHinhAnhData(userID, input, output);
+            ListHinhAnhData lha = new ListHinhAnhData(userID,socket);
             if (lha.guiData()) {
                 dsha = lha.layData();
             }
-
-        } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
         }
         return dsha;
     }
+    
     synchronized public ImageIcon getHinhAnh(String idAnh){
-        
+        ImageIcon img = null;
+        if(sendMessToServer("gui_anh")){
+            HinhAnhData had = new HinhAnhData(userID,idAnh,socket);
+            if(had.guiData()){
+                img = had.layData();
+            }
+        }
+        return  img;
     }
 }

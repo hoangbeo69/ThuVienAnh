@@ -60,4 +60,23 @@ public class ServerDB {
         }
         return dsha;
     }
+
+    public String getFilePathHinhAnh(String userID, String anhID) {
+        connection = new ConnectionDB();
+        String pathImage = null;
+        try{
+            String qry = "SELECT ha_filepath FROM hinh_anh WHERE user_id='"+userID+"' and ha_id = '"+anhID+"'";
+            ResultSet rs = connection.sqlQuery(qry);
+            if(rs!= null){
+                while(rs.next()){
+                    pathImage = rs.getString("ha_filepath");
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Nhận file không thành công");
+        }finally{
+            connection.closeConnect();
+        }
+        return pathImage;
+    }
 }

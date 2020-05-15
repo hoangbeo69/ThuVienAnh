@@ -17,12 +17,12 @@ import ServerDB.ServerDB;
  *
  * @author HiHi
  */
-public class DangNhapBus {
+public class DangNhapBUS {
 
     private String taiKhoan;
     private String matKhau;
     Socket socket;
-    public DangNhapBus(Socket socket) {
+    public DangNhapBUS(Socket socket) {
         this.socket = socket;
     }
     public boolean layDuLieuClient(){
@@ -36,7 +36,7 @@ public class DangNhapBus {
             System.out.println(taiKhoan + matKhau);
             return  true;
         } catch (IOException ex) {
-            Logger.getLogger(DangNhapBus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DangNhapBUS.class.getName()).log(Level.SEVERE, null, ex);
             return  false;
         }
     }
@@ -50,7 +50,7 @@ public class DangNhapBus {
             output.flush();
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(DangNhapBus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DangNhapBUS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } 
     }

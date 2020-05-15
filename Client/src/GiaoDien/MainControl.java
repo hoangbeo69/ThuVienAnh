@@ -27,9 +27,11 @@ public class MainControl extends javax.swing.JFrame {
     public Client client;
     private ArrayList<HinhAnh> danhSachAnh;
     private Boolean NEWEST = true;
-    private int  currentPage = 1;
+    private int currentPage = 1;
     private int currentDungLuong = 0;
+
     public MainControl(Client client, String taiKhoan, String id) {
+        this.client  = client;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -57,55 +59,52 @@ public class MainControl extends javax.swing.JFrame {
         this.setSize(1315, 760);
         this.initComponents();
 
-        //
-//        danhSachAnh = client.getDanhSachAnh();
+        danhSachAnh = client.getDanhSachAnh();
+//        this.validate();
         for (HinhAnh ha : danhSachAnh) {
             currentDungLuong += Integer.parseInt(ha.getDungluong());
         }
+        newDisplayImage(0, 7);
+
 //////////////////////////////////////////////////////////////////////////////
-        HinhAnhPanel ava = new HinhAnhPanel("333","3", "3", "4");
-//        ava.setImageDisplay(new ImageIcon("imageDemo/55992c240315323aef3cfc264274970d.jpg"));
-        panelHinhAnh.add(ava);
-        this.validate();
 
-        JPanel panel2 = new JPanel();
-        panel2.setSize(273, 245);
-        panel2.setBackground(Color.yellow);
-        panelHinhAnh.add(panel2);
-
-        JPanel panel3 = new JPanel();
-        panel3.setSize(273, 245);
-        panel3.setBackground(Color.orange);
-        panelHinhAnh.add(panel3);
-
-        JPanel panel4 = new JPanel();
-        panel4.setSize(273, 245);
-        panel4.setBackground(Color.green);
-        panelHinhAnh.add(panel4);
-
-        JPanel panel5 = new JPanel();
-        panel5.setSize(273, 245);
-        panel5.setBackground(Color.gray);
-        panelHinhAnh.add(panel5);
-
-        JPanel panel6 = new JPanel();
-        panel6.setSize(273, 245);
-        panel6.setBackground(Color.black);
-        panelHinhAnh.add(panel6);
-
-        JPanel panel7 = new JPanel();
-        panel7.setSize(273, 245);
-        panel7.setBackground(Color.pink);
-        panelHinhAnh.add(panel7);
-
-        JPanel panel8 = new JPanel();
-        panel8.setSize(273, 245);
-        panel8.setBackground(Color.blue);
-        panelHinhAnh.add(panel8);
-//        ImageIcon img = new ImageIcon(getClass().getResource("/image/2608782.jpg"));
-//        ava.setImageDisplay(img);
+//        JPanel panel2 = new JPanel();
+//        panel2.setSize(273, 245);
+//        panel2.setBackground(Color.yellow);
+//        panelHinhAnh.add(panel2);
+//
+//        JPanel panel3 = new JPanel();
+//        panel3.setSize(273, 245);
+//        panel3.setBackground(Color.orange);
+//        panelHinhAnh.add(panel3);
+//
+//        JPanel panel4 = new JPanel();
+//        panel4.setSize(273, 245);
+//        panel4.setBackground(Color.green);
+//        panelHinhAnh.add(panel4);
+//
+//        JPanel panel5 = new JPanel();
+//        panel5.setSize(273, 245);
+//        panel5.setBackground(Color.gray);
+//        panelHinhAnh.add(panel5);
+//
+//        JPanel panel6 = new JPanel();
+//        panel6.setSize(273, 245);
+//        panel6.setBackground(Color.black);
+//        panelHinhAnh.add(panel6);
+//
+//        JPanel panel7 = new JPanel();
+//        panel7.setSize(273, 245);
+//        panel7.setBackground(Color.pink);
+//        panelHinhAnh.add(panel7);
+//
+//        JPanel panel8 = new JPanel();
+//        panel8.setSize(273, 245);
+//        panel8.setBackground(Color.blue);
+//        panelHinhAnh.add(panel8);
+//
     }
-    
+
 //lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last
     public void newDisplayImage(int first, int last) {
         panelHinhAnh.removeAll();
@@ -115,12 +114,17 @@ public class MainControl extends javax.swing.JFrame {
         }
     }
 //tạo mới panel ảnh và thêm vào giao diện
+
     public void addNewPanelAnh(HinhAnh ha) {
-        HinhAnhPanel hap = new HinhAnhPanel(ha.getId(),ha.getName(), ha.getDungluong(), ha.getDate());
+        HinhAnhPanel hap = new HinhAnhPanel(ha.getId(), ha.getName(), ha.getDungluong(), ha.getDate());
         panelHinhAnh.add(hap);
+//        ImageIcon img = client.getHinhAnh(hap.getIdAnh());
+//        hap.setImageDisplay(img);
+//        hap.validate();
         new addImageToPanel(hap).start();
     }
 // luồng hàm set ảnh cho panel ảnh
+
     class addImageToPanel implements Runnable {
 
         HinhAnhPanel hap;
@@ -132,7 +136,7 @@ public class MainControl extends javax.swing.JFrame {
 
         @Override
         public void run() {
-            ImageIcon img =  client.getHinhAnh(hap.getIdAnh());
+            ImageIcon img = client.getHinhAnh(hap.getIdAnh());
             hap.setImageDisplay(img);
             hap.validate();
         }
@@ -563,12 +567,12 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnDoubleNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoubleNextMouseClicked
         // TODO add your handling code here:
-        if(danhSachAnh.size() % 8 ==0){
-            currentPage = danhSachAnh.size()/8;
-            newDisplayImage((currentPage -1 )*8,currentPage*8 -1);
-        }else{
-            currentPage = danhSachAnh.size()/8;
-            newDisplayImage((currentPage)*8,currentPage*8 + (danhSachAnh.size()%8) -1);
+        if (danhSachAnh.size() % 8 == 0) {
+            currentPage = danhSachAnh.size() / 8;
+            newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
+        } else {
+            currentPage = danhSachAnh.size() / 8;
+            newDisplayImage((currentPage) * 8, currentPage * 8 + (danhSachAnh.size() % 8) - 1);
         }
     }//GEN-LAST:event_btnDoubleNextMouseClicked
 
@@ -577,12 +581,13 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
         // TODO add your handling code here:
-        if(danhSachAnh.size()>(currentPage*8)){
+        if (danhSachAnh.size() > (currentPage * 8)) {
             ++currentPage;
-            if(danhSachAnh.size() >(currentPage*8)){
-                newDisplayImage((currentPage-1)*8 ,currentPage*8 -1);
-            }else{
-                newDisplayImage((currentPage-1)*8 ,danhSachAnh.size()-1);
+            if (danhSachAnh.size() > (currentPage * 8)) {
+                panelHinhAnh.removeAll();
+                newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
+            } else {
+                newDisplayImage((currentPage - 1) * 8, danhSachAnh.size() - 1);
             }
         }
 
@@ -604,9 +609,9 @@ public class MainControl extends javax.swing.JFrame {
 // <editor-fold defaultstate="collapsed" desc="Button đến trang trước">
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
         // TODO add your handling code here:
-        if(currentPage>1){
+        if (currentPage > 1) {
             --currentPage;
-            newDisplayImage((currentPage-1)*8,currentPage*8 -1 );
+            newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
         }
     }//GEN-LAST:event_btnPrevMouseClicked
 
@@ -637,10 +642,10 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnDoublePrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoublePrevMouseClicked
         // TODO add your handling code here:
-        if(danhSachAnh.size()> 8){
-            newDisplayImage(0,7);
-        }else{
-            newDisplayImage(0,danhSachAnh.size()-1);
+        if (danhSachAnh.size() > 8) {
+            newDisplayImage(0, 7);
+        } else {
+            newDisplayImage(0, danhSachAnh.size() - 1);
         }
     }//GEN-LAST:event_btnDoublePrevMouseClicked
     // </editor-fold> //done

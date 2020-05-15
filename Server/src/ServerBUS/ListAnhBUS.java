@@ -25,19 +25,20 @@ public class ListAnhBUS {
 
     Socket socket;
     String id;
+    DataOutputStream outputLength;
+    ObjectOutputStream output;
 
     public ListAnhBUS(Socket socket) {
         this.socket = socket;
     }
 
     public boolean layDuLieuClient() {
-        
+
         try {
             DataInputStream input = new DataInputStream(socket.getInputStream());
             this.id = input.readUTF();
             return true;
         } catch (IOException ex) {
-
             Logger.getLogger(ListAnhBUS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
@@ -46,16 +47,14 @@ public class ListAnhBUS {
 
     public boolean traDuLieuClient() {
         try {
+
             ServerDB serverDB = new ServerDB();
             ArrayList<HinhAnh> dsha = serverDB.getListHinhAnh(id);
-            DataOutputStream outputLength = new DataOutputStream(socket.getOutputStream());
+            outputLength = new DataOutputStream(socket.getOutputStream());
             outputLength.writeInt(dsha.size() - 1);
-            outputLength.flush();
-            ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
+            output = new ObjectOutputStream(socket.getOutputStream());
             for (HinhAnh ha : dsha) {
-                byte[] byteSend = new byte[1024];
-                byteSend = ha.toString().getBytes();
-                output.write(byteSend, 0, byteSend.length);
+                output.write(ha.toString().getBytes(), 0, ha.toString().getBytes().length);
                 output.flush();
             }
             return true;
