@@ -31,7 +31,7 @@ public class MainControl extends javax.swing.JFrame {
     private int currentDungLuong = 0;
 
     public MainControl(Client client, String taiKhoan, String id) {
-        this.client  = client;
+        this.client = client;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -67,7 +67,6 @@ public class MainControl extends javax.swing.JFrame {
         newDisplayImage(0, 7);
 
 //////////////////////////////////////////////////////////////////////////////
-
 //        JPanel panel2 = new JPanel();
 //        panel2.setSize(273, 245);
 //        panel2.setBackground(Color.yellow);
@@ -107,7 +106,12 @@ public class MainControl extends javax.swing.JFrame {
 
 //lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last
     public void newDisplayImage(int first, int last) {
+
+        //xóa tất cả phân tử có trong panelHinhanh và vẽ lại từ đầu
         panelHinhAnh.removeAll();
+        panelHinhAnh.repaint();
+        panelHinhAnh.validate();
+
         for (int i = first; i <= last; i++) {
             HinhAnh ha = (HinhAnh) danhSachAnh.get(i);
             addNewPanelAnh(ha);
@@ -171,7 +175,7 @@ public class MainControl extends javax.swing.JFrame {
         panelFunction = new javax.swing.JPanel();
         btnSortImgae = new javax.swing.JLabel();
         btnThemAnh = new javax.swing.JLabel();
-        kGradientPanel2 = new keeptoo.KGradientPanel();
+        panelBackGround = new keeptoo.KGradientPanel();
         panelHinhAnh = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -416,21 +420,22 @@ public class MainControl extends javax.swing.JFrame {
 
         getContentPane().add(panelFunction, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 135, -1, 50));
 
-        kGradientPanel2.setkBorderRadius(0);
-        kGradientPanel2.setkEndColor(new java.awt.Color(25, 30, 49));
-        kGradientPanel2.setkGradientFocus(0);
-        kGradientPanel2.setkStartColor(new java.awt.Color(9, 20, 51));
-        kGradientPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelBackGround.setkBorderRadius(0);
+        panelBackGround.setkEndColor(new java.awt.Color(25, 30, 49));
+        panelBackGround.setkGradientFocus(0);
+        panelBackGround.setkStartColor(new java.awt.Color(9, 20, 51));
+        panelBackGround.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panelHinhAnh.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         panelHinhAnh.setMaximumSize(new java.awt.Dimension(1225, 527));
         panelHinhAnh.setMinimumSize(new java.awt.Dimension(1225, 527));
         panelHinhAnh.setName(""); // NOI18N
         panelHinhAnh.setOpaque(false);
         panelHinhAnh.setPreferredSize(new java.awt.Dimension(1225, 527));
-        panelHinhAnh.setLayout(new java.awt.GridLayout(2, 4, 45, 45));
-        kGradientPanel2.add(panelHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 10, 1230, 520));
+        panelHinhAnh.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 45, 45));
+        panelBackGround.add(panelHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 1315, 620));
 
-        getContentPane().add(kGradientPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1320, 530));
+        getContentPane().add(panelBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1320, 530));
 
         pack();
         setLocationRelativeTo(null);
@@ -570,9 +575,11 @@ public class MainControl extends javax.swing.JFrame {
         if (danhSachAnh.size() % 8 == 0) {
             currentPage = danhSachAnh.size() / 8;
             newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
+            panelHinhAnh.validate();
         } else {
             currentPage = danhSachAnh.size() / 8;
             newDisplayImage((currentPage) * 8, currentPage * 8 + (danhSachAnh.size() % 8) - 1);
+            panelHinhAnh.validate();
         }
     }//GEN-LAST:event_btnDoubleNextMouseClicked
 
@@ -584,10 +591,12 @@ public class MainControl extends javax.swing.JFrame {
         if (danhSachAnh.size() > (currentPage * 8)) {
             ++currentPage;
             if (danhSachAnh.size() > (currentPage * 8)) {
-                panelHinhAnh.removeAll();
+
                 newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
+                panelHinhAnh.validate();
             } else {
                 newDisplayImage((currentPage - 1) * 8, danhSachAnh.size() - 1);
+                panelHinhAnh.validate();
             }
         }
 
@@ -611,7 +620,8 @@ public class MainControl extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (currentPage > 1) {
             --currentPage;
-            newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
+            newDisplayImage((currentPage-1) * 8, currentPage * 8 -1);
+            panelHinhAnh.validate();
         }
     }//GEN-LAST:event_btnPrevMouseClicked
 
@@ -644,8 +654,10 @@ public class MainControl extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (danhSachAnh.size() > 8) {
             newDisplayImage(0, 7);
+            panelHinhAnh.validate();
         } else {
             newDisplayImage(0, danhSachAnh.size() - 1);
+            panelHinhAnh.validate();
         }
     }//GEN-LAST:event_btnDoublePrevMouseClicked
     // </editor-fold> //done
@@ -696,10 +708,10 @@ public class MainControl extends javax.swing.JFrame {
     private javax.swing.JLabel btnThemAnh;
     private javax.swing.JLabel jLabel1;
     private keeptoo.KGradientPanel kGradientPanel1;
-    private keeptoo.KGradientPanel kGradientPanel2;
     private javax.swing.JLabel lbBackground;
     private javax.swing.JLabel lbDungLuong;
     private javax.swing.JLabel lbTenTaiKhoan;
+    private keeptoo.KGradientPanel panelBackGround;
     private javax.swing.JPanel panelFunction;
     private javax.swing.JPanel panelHead;
     private javax.swing.JPanel panelHinhAnh;

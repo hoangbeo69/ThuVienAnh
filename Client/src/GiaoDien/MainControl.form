@@ -413,7 +413,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="keeptoo.KGradientPanel" name="kGradientPanel2">
+    <Container class="keeptoo.KGradientPanel" name="panelBackGround">
       <Properties>
         <Property name="kBorderRadius" type="int" value="0"/>
         <Property name="kEndColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -436,6 +436,11 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="panelHinhAnh">
           <Properties>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true"/>
+              </Border>
+            </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[1225, 527]"/>
             </Property>
@@ -450,14 +455,13 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="45" y="10" width="1230" height="520"/>
+              <AbsoluteConstraints x="0" y="-40" width="1315" height="620"/>
             </Constraint>
           </Constraints>
 
-          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-            <Property name="columns" type="int" value="4"/>
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+            <Property name="alignment" type="int" value="3"/>
             <Property name="horizontalGap" type="int" value="45"/>
-            <Property name="rows" type="int" value="2"/>
             <Property name="verticalGap" type="int" value="45"/>
           </Layout>
         </Container>
