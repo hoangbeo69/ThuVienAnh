@@ -73,13 +73,16 @@ public class ConnectionDB {
         return null;
     }
 
-    public Boolean sqlUpdata(String qry) {
+    public Boolean sqlUpdate(String qry) {
+        System.out.println(qry);
         if (checkConnect()) {
             try {
                 stmt.executeUpdate(qry);
                 System.out.println("Success Update Query " + qry);
                 return true;
             } catch (SQLException ex) {
+                System.err.println("-- ERROR! không thể update '" + DB_Name + "'");
+
                 Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
             }

@@ -8,6 +8,7 @@ package server;
 import ServerBUS.DangNhapBUS;
 import ServerBUS.HinhAnhBUS;
 import ServerBUS.ListAnhBUS;
+import ServerBUS.ThemAnhBUS;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -22,14 +23,14 @@ import java.util.logging.Logger;
  */
 public class ServerHandler {
 
-     Socket socket;
+    Socket socket;
     ObjectInputStream inputStream;
 
     public ServerHandler(Socket socket) {
         this.socket = socket;
     }
 
-   synchronized public void handle(String mess) {
+    synchronized public void handle(String mess) {
         //đăng nhập - gửi list hình ảnh - gửi từng ảnh - đổi mk - đổi thông tin - xóa ảnh - thêm ảnh - 
         //dang_nhap - gui_list_anh  - gui_anh - doi_mat_khau  - doi_thong_tin - xoa_anh - them_anh - tai_anh
 
@@ -68,18 +69,23 @@ public class ServerHandler {
             dangNhap.traDulieuClient();
         }
     }
-    public void guiListAnh(){
+
+    public void guiListAnh() {
         ListAnhBUS listAnh = new ListAnhBUS(this.socket);
-        if(listAnh.layDuLieuClient()){
+        if (listAnh.layDuLieuClient()) {
             listAnh.traDuLieuClient();
         }
     }
-    public void guiAnh(){
-        System.out.println("yeu cau nhan hinh ảnh");
+
+    public void guiAnh() {
         HinhAnhBUS hinhanh = new HinhAnhBUS(this.socket);
-        if(hinhanh.layDuLieuClient()){
-            System.out.println("lay du lieu thanh cong");
+        if (hinhanh.layDuLieuClient()) {
             hinhanh.traDulieuClient();
         }
+    }
+
+    public void themAnh() {
+        ThemAnhBUS themanh = new ThemAnhBUS(this.socket);
+        themanh.layDuLieuCliet();
     }
 }

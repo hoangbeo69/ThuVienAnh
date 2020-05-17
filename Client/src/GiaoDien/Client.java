@@ -6,6 +6,7 @@
 package GiaoDien;
 
 import BackEndClass.HinhAnh;
+import BackEndData.GuiHinhAnhData;
 import BackEndData.HinhAnhData;
 import BackEndData.ListHinhAnhData;
 import GiaoDien.DangNhap.DangNhapConnection;
@@ -32,6 +33,7 @@ public class Client {
     Socket socket;
     String userID;
     DataOutputStream outputStream;
+
     public Client() {
         try {
             this.socket = new Socket("localhost", 5555);
@@ -67,24 +69,38 @@ public class Client {
 
     public ArrayList<HinhAnh> getDanhSachAnh() {
         ArrayList<HinhAnh> dsha = null;
-        if(sendMessToServer("gui_list_anh")){
-            ListHinhAnhData lha = new ListHinhAnhData(userID,socket);
+        if (sendMessToServer("gui_list_anh")) {
+            ListHinhAnhData lha = new ListHinhAnhData(userID, socket);
             if (lha.guiData()) {
                 dsha = lha.layData();
             }
-            
+
         }
         return dsha;
     }
-    
-    synchronized public ImageIcon getHinhAnh(String idAnh){
+
+    synchronized public ImageIcon getHinhAnh(String idAnh) {
         ImageIcon img = null;
-        if(sendMessToServer("gui_anh")){
-            HinhAnhData had = new HinhAnhData(userID,idAnh,socket);
-            if(had.guiData()){
+        if (sendMessToServer("gui_anh")) {
+            HinhAnhData had = new HinhAnhData(userID, idAnh, socket);
+            if (had.guiData()) {
                 img = had.layData();
             }
         }
-        return  img;
+        return img;
+    }
+
+    boolean guiAnhMoi(HinhAnh ha) {
+        if (sendMessToServer("them_anh")) {
+            GuiHinhAnhData ghad = new GuiHinhAnhData(userID, ha, socket);
+            if (ghad.guiData()) {
+                if(ghad.layData()){
+                    return  true;
+                }else{
+                    return false;
+                }
+            }
+        }
+        return false;
     }
 }

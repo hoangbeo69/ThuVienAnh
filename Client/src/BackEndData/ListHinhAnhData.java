@@ -56,7 +56,7 @@ public class ListHinhAnhData {
                 byte[] byteRead = new byte[1024];
                 inputStreamObject.read(byteRead, 0, byteRead.length);
                 String[] data = new String(byteRead).trim().split("\\$");
-                HinhAnh ha = new HinhAnh(data[0],data[1],data[2],data[3],data[4]);
+                HinhAnh ha = new HinhAnh(data[0],data[1],Integer.parseInt(data[2]),java.sql.Date.valueOf(data[3]));
                 dsha.add(ha);
             }
             

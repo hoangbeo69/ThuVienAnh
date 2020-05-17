@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package ServerBUS;
-
+import java.sql.Date;
 /**
  *
  * @author HiHi
@@ -13,21 +13,19 @@ public class HinhAnh {
 
     String id;
     String name;
-    String filePath;
-    String dungluong;
-    String date;
+    int dungluong;
+    Date date;
     
-    public HinhAnh(String id, String name, String filePath, String dungluong, String date) {
+    public HinhAnh(String id, String name, int dungluong, Date date) {
         this.id = id;
         this.name = name;
-        this.filePath = filePath;
         this.dungluong = dungluong;
         this.date = date;
     }
 
     @Override
     public String toString() {
-        return id + "$" + name + "$" + filePath + "$" + dungluong + "$" + date;
+        return id + "$" + name  + "$" + dungluong + "$" + date.toString();
     }
     
 
@@ -43,31 +41,25 @@ public class HinhAnh {
         return name;
     }
 
-    public String getFilePath() {
-        return filePath;
-    }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getDungluong() {
+    public int getDungluong() {
         return dungluong;
     }
 
-    public void setDungluong(String dungluong) {
+    public void setDungluong(int dungluong) {
         this.dungluong = dungluong;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

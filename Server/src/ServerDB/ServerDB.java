@@ -44,11 +44,11 @@ public class ServerDB {
         connection = new ConnectionDB();
         ArrayList<HinhAnh> dsha = new ArrayList<>();
         try {
-            String qry = "SELECT ha_id,ha_name,ha_filepath,ha_dungluong,ha_date FROM hinh_anh WHERE user_id = '" + id + "'";
+            String qry = "SELECT ha_id,ha_name,ha_dungluong,ha_date FROM hinh_anh WHERE user_id = '" + id + "'";
             ResultSet rs = connection.sqlQuery(qry);
             if (rs != null) {
                 while (rs.next()) {
-                    HinhAnh ha = new HinhAnh(rs.getString("ha_id"), rs.getString("ha_name"), rs.getString("ha_filepath"), rs.getString("ha_dungluong"), rs.getString("ha_date"));
+                    HinhAnh ha = new HinhAnh(rs.getString("ha_id"), rs.getString("ha_name"), rs.getInt("ha_dungluong"), java.sql.Date.valueOf(rs.getString("ha_date")));
                     dsha.add(ha);
                 }
             }
@@ -78,5 +78,21 @@ public class ServerDB {
             connection.closeConnect();
         }
         return pathImage;
+    }
+
+//(`ha_id`, `ha_name`, `ha_filepath`, `ha_dungluong`, `user_id`, `ha_date`) VALUES ('', '', '', '', '', '')
+
+    public Boolean updateThemAnh(String pathfile,String id, HinhAnh ha) {
+        connection = new ConnectionDB();
+        
+        Boolean success = connection.sqlUpdate("INSERT INTO hinh_anh (ha_id,ha_name,ha_filepath,ha_dungluong,user_id,ha_date) VALUES ('" 
+                +ha.getId()+"','"
+                +ha.getName()+"','"
+                +pathfile+"',"
+                +ha.getDungluong()+",'"
+                +id+"','"
+                +ha.getDate()+"');");
+        connection.checkConnect();
+        return success;
     }
 }

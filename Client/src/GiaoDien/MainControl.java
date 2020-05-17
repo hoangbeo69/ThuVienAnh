@@ -13,7 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import keeptoo.KTextField;
 import BackEndClass.HinhAnh;
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -62,49 +67,27 @@ public class MainControl extends javax.swing.JFrame {
         danhSachAnh = client.getDanhSachAnh();
 //        this.validate();
         for (HinhAnh ha : danhSachAnh) {
-            currentDungLuong += Integer.parseInt(ha.getDungluong());
+            currentDungLuong += ha.getDungluong();
         }
         newDisplayImage(0, 7);
-
-//////////////////////////////////////////////////////////////////////////////
-//        JPanel panel2 = new JPanel();
-//        panel2.setSize(273, 245);
-//        panel2.setBackground(Color.yellow);
-//        panelHinhAnh.add(panel2);
-//
-//        JPanel panel3 = new JPanel();
-//        panel3.setSize(273, 245);
-//        panel3.setBackground(Color.orange);
-//        panelHinhAnh.add(panel3);
-//
-//        JPanel panel4 = new JPanel();
-//        panel4.setSize(273, 245);
-//        panel4.setBackground(Color.green);
-//        panelHinhAnh.add(panel4);
-//
-//        JPanel panel5 = new JPanel();
-//        panel5.setSize(273, 245);
-//        panel5.setBackground(Color.gray);
-//        panelHinhAnh.add(panel5);
-//
-//        JPanel panel6 = new JPanel();
-//        panel6.setSize(273, 245);
-//        panel6.setBackground(Color.black);
-//        panelHinhAnh.add(panel6);
-//
-//        JPanel panel7 = new JPanel();
-//        panel7.setSize(273, 245);
-//        panel7.setBackground(Color.pink);
-//        panelHinhAnh.add(panel7);
-//
-//        JPanel panel8 = new JPanel();
-//        panel8.setSize(273, 245);
-//        panel8.setBackground(Color.blue);
-//        panelHinhAnh.add(panel8);
-//
     }
 
+    public void DisplayFirstPageImage() {
+        if (danhSachAnh.size() > 8) {
+            newDisplayImage(0, 7);
+            panelHinhAnh.validate();
+        } else {
+            newDisplayImage(0, danhSachAnh.size() - 1);
+            panelHinhAnh.validate();
+        }
+    }
 //lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last
+
+    public void setPageCount(int count) {
+        lbPageCount.setText("" + count);
+        lbPageCount.validate();
+    }
+
     public void newDisplayImage(int first, int last) {
 
         //xóa tất cả phân tử có trong panelHinhanh và vẽ lại từ đầu
@@ -120,7 +103,7 @@ public class MainControl extends javax.swing.JFrame {
 //tạo mới panel ảnh và thêm vào giao diện
 
     public void addNewPanelAnh(HinhAnh ha) {
-        HinhAnhPanel hap = new HinhAnhPanel(ha.getId(), ha.getName(), ha.getDungluong(), ha.getDate());
+        HinhAnhPanel hap = new HinhAnhPanel(ha.getId(), ha.getName(), ha.getDungluong() + "", ha.getDate().toString());
         panelHinhAnh.add(hap);
 //        ImageIcon img = client.getHinhAnh(hap.getIdAnh());
 //        hap.setImageDisplay(img);
@@ -167,7 +150,7 @@ public class MainControl extends javax.swing.JFrame {
         btnLogout = new javax.swing.JLabel();
         lbBackground = new javax.swing.JLabel();
         panelNextPage = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lbPageCount = new javax.swing.JLabel();
         btnDoublePrev = new javax.swing.JLabel();
         btnNext = new javax.swing.JLabel();
         btnDoubleNext = new javax.swing.JLabel();
@@ -287,12 +270,12 @@ public class MainControl extends javax.swing.JFrame {
         panelNextPage.setBackground(new java.awt.Color(25, 30, 49));
         panelNextPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("1");
-        panelNextPage.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 35, 35));
+        lbPageCount.setBackground(new java.awt.Color(153, 153, 153));
+        lbPageCount.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        lbPageCount.setForeground(new java.awt.Color(255, 255, 255));
+        lbPageCount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbPageCount.setText("1");
+        panelNextPage.add(lbPageCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 35, 35));
 
         btnDoublePrev.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_left_30px_1.png"))); // NOI18N
@@ -440,7 +423,16 @@ public class MainControl extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+//<editor-fold defaultstate="collapsed" desc="Getter setter danh sach anh">
 
+    public ArrayList<HinhAnh> getDanhSachAnh() {
+        return danhSachAnh;
+    }
+
+    public void setDanhSachAnh(ArrayList<HinhAnh> danhSachAnh) {
+        this.danhSachAnh = danhSachAnh;
+    }
+//        //</editor-fold>
 // <editor-fold defaultstate="collapsed" desc="Button chỉnh sửa thông tin">     
     private void btnChinhSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseEntered
         // TODO add your handling code here:
@@ -514,7 +506,7 @@ public class MainControl extends javax.swing.JFrame {
         btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_multiply_35px_2.png")));
         btnClose.validate();
     }//GEN-LAST:event_btnCloseMouseExited
-    // </editor-fold> 
+    // </editor-fold> //done
 // <editor-fold defaultstate="collapsed" desc="Button Sắp xếp danh sách ảnh">
     private void btnSortImgaeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSortImgaeMouseClicked
         // TODO add your handling code here:
@@ -543,8 +535,43 @@ public class MainControl extends javax.swing.JFrame {
 // <editor-fold defaultstate="collapsed" desc="Button Thêm ảnh">
     private void btnThemAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemAnhMouseClicked
         // TODO add your handling code here:
+        HinhAnh ha;
+        if ((ha = themHinhAnhMoi()) != null) {
+            if (client.guiAnhMoi(ha)) {
+                this.setOpacity(0.95f);
+                JOptionPane.showMessageDialog(null, "Lưu Ảnh Mới Thành Công", "Lưu Ảnh", JOptionPane.INFORMATION_MESSAGE);
+                this.setOpacity(1f);
+                danhSachAnh = client.getDanhSachAnh();
+                DisplayFirstPageImage();
+            } else {
+                this.setOpacity(0.95f);
+                JOptionPane.showMessageDialog(null, "Lưu Ảnh Mới Không Thành Công", "Lưu Ảnh", JOptionPane.ERROR_MESSAGE);
+                this.setOpacity(1f);
+            }
 
+        }
     }//GEN-LAST:event_btnThemAnhMouseClicked
+    //mở của sổ để chọn file cần lưu
+    private HinhAnh themHinhAnhMoi() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn Hình Ảnh Mới"); //tiêu đề
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png"));//lọc dạng
+        fileChooser.setAcceptAllFileFilterUsed(true);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // chỉ lấy file không lấy thư mục
+        fileChooser.setLocation(200, 200);
+        int choice = fileChooser.showOpenDialog(this);
+        if (choice == fileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            // String tenAnh = fileToSave.getName();
+            int dungLuong = (int) fileToSave.length();
+            long millis = System.currentTimeMillis();
+            java.sql.Date date = new java.sql.Date(millis);
+            Random r = new Random();
+            String idAnh = "IMG" + r.nextInt(99999);
+            return new HinhAnh(idAnh, fileToSave.getPath(), dungLuong, date); //tạm thời file path là ten anh de su dung file path tiện hơn khi đọc và sửa sau
+        }
+        return null;
+    }
 
     private void btnThemAnhMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemAnhMouseEntered
         // TODO add your handling code here:
@@ -573,11 +600,13 @@ public class MainControl extends javax.swing.JFrame {
     private void btnDoubleNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoubleNextMouseClicked
         // TODO add your handling code here:
         if (danhSachAnh.size() % 8 == 0) {
-            currentPage = danhSachAnh.size() / 8;
+            this.currentPage = danhSachAnh.size() / 8;
+            setPageCount(currentPage);
             newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
             panelHinhAnh.validate();
         } else {
-            currentPage = danhSachAnh.size() / 8;
+            this.currentPage = danhSachAnh.size() / 8;
+            setPageCount(currentPage+1);
             newDisplayImage((currentPage) * 8, currentPage * 8 + (danhSachAnh.size() % 8) - 1);
             panelHinhAnh.validate();
         }
@@ -588,14 +617,15 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
         // TODO add your handling code here:
-        if (danhSachAnh.size() > (currentPage * 8)) {
-            ++currentPage;
-            if (danhSachAnh.size() > (currentPage * 8)) {
+        if (danhSachAnh.size() > (this.currentPage * 8)) {
+            ++this.currentPage;
+            setPageCount(currentPage);
+            if (danhSachAnh.size() > (this.currentPage * 8)) {
 
-                newDisplayImage((currentPage - 1) * 8, currentPage * 8 - 1);
+                newDisplayImage((this.currentPage - 1) * 8, this.currentPage * 8 - 1);
                 panelHinhAnh.validate();
             } else {
-                newDisplayImage((currentPage - 1) * 8, danhSachAnh.size() - 1);
+                newDisplayImage((this.currentPage - 1) * 8, danhSachAnh.size() - 1);
                 panelHinhAnh.validate();
             }
         }
@@ -618,9 +648,10 @@ public class MainControl extends javax.swing.JFrame {
 // <editor-fold defaultstate="collapsed" desc="Button đến trang trước">
     private void btnPrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseClicked
         // TODO add your handling code here:
-        if (currentPage > 1) {
-            --currentPage;
-            newDisplayImage((currentPage-1) * 8, currentPage * 8 -1);
+        if (this.currentPage > 1) {
+            --this.currentPage;
+            setPageCount(this.currentPage);
+            newDisplayImage((this.currentPage - 1) * 8, this.currentPage * 8 - 1);
             panelHinhAnh.validate();
         }
     }//GEN-LAST:event_btnPrevMouseClicked
@@ -652,6 +683,7 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnDoublePrevMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoublePrevMouseClicked
         // TODO add your handling code here:
+        setPageCount(1);
         if (danhSachAnh.size() > 8) {
             newDisplayImage(0, 7);
             panelHinhAnh.validate();
@@ -706,10 +738,10 @@ public class MainControl extends javax.swing.JFrame {
     private javax.swing.JLabel btnPrev;
     private javax.swing.JLabel btnSortImgae;
     private javax.swing.JLabel btnThemAnh;
-    private javax.swing.JLabel jLabel1;
     private keeptoo.KGradientPanel kGradientPanel1;
     private javax.swing.JLabel lbBackground;
     private javax.swing.JLabel lbDungLuong;
+    private javax.swing.JLabel lbPageCount;
     private javax.swing.JLabel lbTenTaiKhoan;
     private keeptoo.KGradientPanel panelBackGround;
     private javax.swing.JPanel panelFunction;
