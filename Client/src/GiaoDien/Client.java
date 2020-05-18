@@ -9,20 +9,14 @@ import BackEndClass.HinhAnh;
 import BackEndData.GuiHinhAnhData;
 import BackEndData.HinhAnhData;
 import BackEndData.ListHinhAnhData;
+import BackEndData.XoaAnhData;
 import GiaoDien.DangNhap.DangNhapConnection;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -79,15 +73,15 @@ public class Client {
         return dsha;
     }
 
-    synchronized public ImageIcon getHinhAnh(String idAnh) {
-        ImageIcon img = null;
+    synchronized public byte [] getHinhAnh(String idAnh) {
+        byte [] data = null;
         if (sendMessToServer("gui_anh")) {
             HinhAnhData had = new HinhAnhData(userID, idAnh, socket);
             if (had.guiData()) {
-                img = had.layData();
+                data = had.layData();
             }
         }
-        return img;
+        return data;
     }
 
     boolean guiAnhMoi(HinhAnh ha) {
@@ -99,6 +93,20 @@ public class Client {
                 }else{
                     return false;
                 }
+            }
+        }
+        return false;
+    }
+
+    public  boolean xoaHinhAnh(String idAnh) {
+        if(sendMessToServer("xoa_anh")){
+            XoaAnhData xadt = new XoaAnhData(userID,idAnh,socket);
+                if(xadt.guiData()){
+                    if(xadt.layData()){
+                        return true;
+                    }else{
+                        return false;
+                    }
             }
         }
         return false;

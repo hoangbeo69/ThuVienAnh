@@ -61,7 +61,6 @@ public class DangNhapConnection {
 
             input.read(dataRead, 0, dataRead.length);
             id =  new String(dataRead).trim();
-
         } catch (IOException ex) {
             Logger.getLogger(DangNhapConnection.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -56,10 +56,6 @@ public class ServerHandler {
             case "them_anh":
                 themAnh();
                 break;
-            case "tai_anh":
-                taiAnh();
-                break;
-
         }
     }
 

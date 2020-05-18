@@ -15,6 +15,8 @@ import keeptoo.KTextField;
 import BackEndClass.HinhAnh;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -29,7 +31,7 @@ public class MainControl extends javax.swing.JFrame {
     /**
      * Creates new form MainControl
      */
-    public Client client;
+    static public Client client;
     private ArrayList<HinhAnh> danhSachAnh;
     private Boolean NEWEST = true;
     private int currentPage = 1;
@@ -65,14 +67,29 @@ public class MainControl extends javax.swing.JFrame {
         this.initComponents();
 
         danhSachAnh = client.getDanhSachAnh();
-//        this.validate();
+        if (danhSachAnh.size() != 0) {
+            setDungLuong();
+            sortFirstList();
+            newDisplayImage(0, 7);
+        }
+        lbTenTaiKhoan.setText(taiKhoan);
+    }
+
+    public void setDungLuong() {
         for (HinhAnh ha : danhSachAnh) {
             currentDungLuong += ha.getDungluong();
         }
-        newDisplayImage(0, 7);
+        float percent = currentDungLuong / 104857600;
+        lbDungLuong.setText("Dung lượng còn trống " +  percent * 100 + " của 100 MB");
     }
 
+//show list những ảnh page 1
     public void DisplayFirstPageImage() {
+        if (NEWEST) {
+            sortFirstList();
+        } else {
+            sortLatestList();
+        }
         if (danhSachAnh.size() > 8) {
             newDisplayImage(0, 7);
             panelHinhAnh.validate();
@@ -81,13 +98,14 @@ public class MainControl extends javax.swing.JFrame {
             panelHinhAnh.validate();
         }
     }
-//lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last
 
+//đặt thứ tự trang
     public void setPageCount(int count) {
         lbPageCount.setText("" + count);
         lbPageCount.validate();
     }
 
+//lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last    
     public void newDisplayImage(int first, int last) {
 
         //xóa tất cả phân tử có trong panelHinhanh và vẽ lại từ đầu
@@ -100,18 +118,16 @@ public class MainControl extends javax.swing.JFrame {
             addNewPanelAnh(ha);
         }
     }
-//tạo mới panel ảnh và thêm vào giao diện
 
+//tạo mới panel ảnh và thêm vào giao diện
     public void addNewPanelAnh(HinhAnh ha) {
         HinhAnhPanel hap = new HinhAnhPanel(ha.getId(), ha.getName(), ha.getDungluong() + "", ha.getDate().toString());
         panelHinhAnh.add(hap);
-//        ImageIcon img = client.getHinhAnh(hap.getIdAnh());
-//        hap.setImageDisplay(img);
-//        hap.validate();
+
         new addImageToPanel(hap).start();
     }
-// luồng hàm set ảnh cho panel ảnh
 
+// luồng hàm set ảnh cho panel ảnh
     class addImageToPanel implements Runnable {
 
         HinhAnhPanel hap;
@@ -123,9 +139,14 @@ public class MainControl extends javax.swing.JFrame {
 
         @Override
         public void run() {
-            ImageIcon img = client.getHinhAnh(hap.getIdAnh());
-            hap.setImageDisplay(img);
+            byte[] data = client.getHinhAnh(hap.getIdAnh());
+            if( data.length != 0){
+            data = client.getHinhAnh(hap.getIdAnh());
+            hap.setImageDisplay(data);
             hap.validate();
+            }else{
+                System.out.println("Không nhận đc data");
+            }
         }
 
         public void start() {
@@ -135,6 +156,41 @@ public class MainControl extends javax.swing.JFrame {
             }
         }
     }
+
+    //sắp xếp ngày mới đễn cũ
+    public void sortFirstList() {
+        Collections.sort(danhSachAnh, new Comparator<HinhAnh>() {
+            @Override
+            public int compare(HinhAnh o1, HinhAnh o2) {
+                if (o1.getDate().compareTo(o2.getDate()) == 0) {
+                    return 0;
+                } else if (o1.getDate().compareTo(o2.getDate()) == 1) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        }
+        );
+    }
+
+    //sắp xếp ngày cũ đến mới
+    public void sortLatestList() {
+        Collections.sort(danhSachAnh, new Comparator<HinhAnh>() {
+            @Override
+            public int compare(HinhAnh o1, HinhAnh o2) {
+                if (o1.getDate().compareTo(o2.getDate()) == 0) {
+                    return 0;
+                } else if (o1.getDate().compareTo(o2.getDate()) == 1) {
+                    return 1;
+                } else {
+                    return -1;
+                }
+            }
+        }
+        );
+    }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -195,7 +251,6 @@ public class MainControl extends javax.swing.JFrame {
 
         lbDungLuong.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lbDungLuong.setForeground(new java.awt.Color(204, 204, 204));
-        lbDungLuong.setText("Dung lượng còn trống 15%");
         panelHead.add(lbDungLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, 30));
 
         btnChinhSua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -514,11 +569,16 @@ public class MainControl extends javax.swing.JFrame {
             NEWEST = false;
             btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_sort_up_30px_1.png")));
             btnSortImgae.setText("Cũ Nhất");
+            sortLatestList();
+            DisplayFirstPageImage();
             btnSortImgae.validate();
         } else {
             NEWEST = true;
             btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_sort_down_30px_1.png")));
             btnSortImgae.setText("Mới Nhất");
+            sortFirstList();
+            DisplayFirstPageImage();
+            btnSortImgae.validate();
         }
     }//GEN-LAST:event_btnSortImgaeMouseClicked
 
@@ -531,7 +591,7 @@ public class MainControl extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnSortImgae.setForeground(new Color(204, 204, 204));
     }//GEN-LAST:event_btnSortImgaeMouseExited
-    // </editor-fold> 
+    // </editor-fold> //done
 // <editor-fold defaultstate="collapsed" desc="Button Thêm ảnh">
     private void btnThemAnhMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnThemAnhMouseClicked
         // TODO add your handling code here:
@@ -582,7 +642,7 @@ public class MainControl extends javax.swing.JFrame {
         // TODO add your handling code here:
         btnThemAnh.setForeground(new Color(204, 204, 204));
     }//GEN-LAST:event_btnThemAnhMouseExited
-    // </editor-fold> 
+    // </editor-fold> //done
 // <editor-fold defaultstate="collapsed" desc="Button Đến trang cuối">
 
     private void btnDoubleNextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoubleNextMouseEntered
@@ -606,7 +666,7 @@ public class MainControl extends javax.swing.JFrame {
             panelHinhAnh.validate();
         } else {
             this.currentPage = danhSachAnh.size() / 8;
-            setPageCount(currentPage+1);
+            setPageCount(currentPage + 1);
             newDisplayImage((currentPage) * 8, currentPage * 8 + (danhSachAnh.size() % 8) - 1);
             panelHinhAnh.validate();
         }
@@ -693,7 +753,6 @@ public class MainControl extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDoublePrevMouseClicked
     // </editor-fold> //done
-
     /**
      * @param args the command line arguments
      */

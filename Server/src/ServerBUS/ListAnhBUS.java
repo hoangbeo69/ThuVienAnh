@@ -51,11 +51,13 @@ public class ListAnhBUS {
             ServerDB serverDB = new ServerDB();
             ArrayList<HinhAnh> dsha = serverDB.getListHinhAnh(id);
             outputLength = new DataOutputStream(socket.getOutputStream());
-            outputLength.writeInt(dsha.size() - 1);
-            output = new ObjectOutputStream(socket.getOutputStream());
-            for (HinhAnh ha : dsha) {
-                output.write(ha.toString().getBytes(), 0, ha.toString().getBytes().length);
-                output.flush();
+            outputLength.writeInt(dsha.size());
+            if (dsha.size() != 0) {
+                output = new ObjectOutputStream(socket.getOutputStream());
+                for (HinhAnh ha : dsha) {
+                    output.write(ha.toString().getBytes(), 0, ha.toString().getBytes().length);
+                    output.flush();
+                }
             }
             return true;
         } catch (IOException ex) {

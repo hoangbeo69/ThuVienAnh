@@ -6,18 +6,22 @@
 package GiaoDien;
 
 import java.awt.Color;
-import java.awt.Cursor;
-import static java.awt.Cursor.HAND_CURSOR;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.LayoutManager;
-import java.awt.RenderingHints;
-import javax.swing.Icon;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -30,14 +34,17 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     JLabel lbHinhAnh = new JLabel();
     JLabel lbTenAnh = new JLabel();
     JLabel lbXoaAnh = new JLabel();
-    private ImageIcon img;
-    private String idAnh ;
+    private String idAnh;
+    private String name;
+    byte[] arrayImage;
 
     public String getIdAnh() {
         return idAnh;
     }
-    public HinhAnhPanel(String idAnh,String tenAnh, String dungLuong, String ngay) {
+
+    public HinhAnhPanel(String idAnh, String tenAnh, String dungLuong, String ngay) {
         this.idAnh = idAnh;
+        this.name = tenAnh;
         this.setkBorderRadius(0);
         this.setBackground(new java.awt.Color(255, 255, 255));
         this.setkEndColor(new java.awt.Color(71, 74, 81));
@@ -156,7 +163,12 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
 
     private void MouseClickedTA(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
-
+        String pathFile = layDuongDanSave();
+        if (writeToFile(pathFile)) {
+            JOptionPane.showMessageDialog(null, "Lưu Ảnh Thành Công", "Lưu Ảnh", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Lưu Ảnh Không Thành Công", "Lưu Ảnh", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
 //    #########################################
@@ -169,22 +181,69 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.setkStartColor(new java.awt.Color(103, 104, 111));
     }
 
-    private void MouseClickedXA(java.awt.event.MouseEvent evt) {
-        // TODO add your handling code here:
+//    private void MouseClickedXA(java.awt.event.MouseEvent evt) {
+//        // TODO add your handling code here:
+//        int x = JOptionPane.showConfirmDialog(null, "Bạn Xác Nhận Muốn Xóa", "Xóa Ảnh", JOptionPane.YES_NO_OPTION);
+//        if (x == 0) {
+//            if (MainControl.deleteImage(idAnh)) {
+//                JOptionPane.showMessageDialog(null, "Xóa Ảnh Thành Công", "Xóa Ảnh", JOptionPane.INFORMATION_MESSAGE);
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Xóa Ảnh Thành Công", "Xóa Ảnh", JOptionPane.INFORMATION_MESSAGE);
+//            }
+//
+//        }
+//    }
+
+    public void setImageDisplay(byte[] data) {
+        BufferedImage bufImg = null;
+        this.arrayImage = data;
+        try {
+            bufImg = ImageIO.read(new ByteArrayInputStream(data));
+            ImageIcon imageIcon = new ImageIcon(bufImg);
+//            int height = 180;
+//            int width = 273;
+            Image img2 = imageIcon.getImage().getScaledInstance(273, 180, 1);
+            lbHinhAnh.setIcon(new ImageIcon(img2));
+            lbHinhAnh.setText("Image");
+            this.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
+        } catch (IOException ex) {
+            Logger.getLogger(HinhAnhPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
-    public void setImageDisplay(ImageIcon imageIcon) {
-        int height = 180;
-        int width = 273;
-        this.img = imageIcon;
-        Image img2 = imageIcon.getImage().getScaledInstance(273, 180, 1);
-        lbHinhAnh.setIcon(new ImageIcon(img2));
-        lbHinhAnh.setText("Image");
-        this.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
+    private String layDuongDanSave() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Chọn Hình Ảnh Mới"); //tiêu đề
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("Images", "jpg", "png"));//lọc dạng
+        fileChooser.setAcceptAllFileFilterUsed(true);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // chỉ lấy file không lấy thư mục
+        fileChooser.setLocation(200, 200);
+        fileChooser.setSelectedFile(new File(System.getProperty("user.dir") + "/" + this.getName()));
+        int choice = fileChooser.showSaveDialog(this);
+        if (choice == fileChooser.APPROVE_OPTION) {
+            File fileToSave = fileChooser.getSelectedFile();
+            return fileToSave.getAbsolutePath();
+        }
+        return null;
     }
 
-    public ImageIcon getImg() {
-        return img;
+    public String getName() {
+        return name;
     }
-    
+
+    public boolean writeToFile(String path) {
+        try {
+            BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(new File(path)));
+            output.write(arrayImage, 0, arrayImage.length);
+            output.close();
+            return true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HinhAnhPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(HinhAnhPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }

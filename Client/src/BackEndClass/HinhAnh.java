@@ -11,12 +11,11 @@ import java.sql.Date;
  *
  * @author HiHi
  */
-
 public class HinhAnh {
 
     String id;
     String name;
-    int  dungluong;
+    int dungluong;
     Date date;
 
     public HinhAnh(String id, String name, int dungluong, Date date) {
@@ -60,7 +59,16 @@ public class HinhAnh {
 
     @Override
     public String toString() {
-        return id + "$" + name + "$" + dungluong + "$" + date.toString() ;
+        return id + "$" + name + "$" + dungluong + "$" + date.toString();
     }
+
+//    public int compareTo(HinhAnh hinhAnh) {
+//
+//        if (this.getDate() == null || hinhAnh.getDate() == null) {
+//            return 0;
+//        }
+//        return this.getDate().compareTo(hinhAnh.getDate());
+//
+//    }
 
 }
