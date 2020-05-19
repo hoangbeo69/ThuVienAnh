@@ -54,18 +54,18 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbDate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lbDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/calendar_15px.png"))); // NOI18N
+        lbDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/calendar_15px.png"))); // NOI18N
         lbDate.setText(ngay);
         lbDate.setForeground(new Color(136, 138, 143));
         this.add(lbDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 263, 30));
 
         lbTaiAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTaiAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/download_20px.png"))); // NOI18N
+        lbTaiAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/download_20px.png"))); // NOI18N
         lbTaiAnh.setVisible(false);
         this.add(lbTaiAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 30, 30));
 
         lbXoaAnh.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbXoaAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete_25px.png"))); // NOI18N
+        lbXoaAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/delete_25px.png"))); // NOI18N
         lbXoaAnh.setVisible(false);
         this.add(lbXoaAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 30, 30));
         lbTenAnh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

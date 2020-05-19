@@ -7,6 +7,8 @@ package GiaoDien;
 
 import java.awt.Color;
 import BackEndClass.HinhAnh;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,9 +59,12 @@ public class MainControl extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
+
         this.setUndecorated(true);
-        this.setSize(1315, 760);
+        this.setSize(1315, 755);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+        this.setBackground(new Color(0, 0, 0, 0));
         this.initComponents();
         lbTenTaiKhoan.setText(taiKhoan); //set tên tài khoản vào lbTenTaiKhoan
         danhSachAnh = client.getDanhSachAnh(); //nhận danh sách ảnh từ server
@@ -242,7 +247,7 @@ public class MainControl extends javax.swing.JFrame {
         panelHead.add(lbDungLuong, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 280, 30));
 
         btnChinhSua.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_edit_property_25px.png"))); // NOI18N
+        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_edit_property_25px.png"))); // NOI18N
         btnChinhSua.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnChinhSuaMouseClicked(evt);
@@ -257,7 +262,7 @@ public class MainControl extends javax.swing.JFrame {
         panelHead.add(btnChinhSua, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 30, 30));
 
         btnClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_multiply_35px_2.png"))); // NOI18N
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_multiply_35px_2.png"))); // NOI18N
         btnClose.setPreferredSize(new java.awt.Dimension(40, 40));
         btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -274,7 +279,7 @@ public class MainControl extends javax.swing.JFrame {
 
         btnMinimize.setForeground(new java.awt.Color(204, 0, 0));
         btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_minus_35px.png"))); // NOI18N
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_minus_35px.png"))); // NOI18N
         btnMinimize.setPreferredSize(new java.awt.Dimension(40, 40));
         btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -290,7 +295,7 @@ public class MainControl extends javax.swing.JFrame {
         panelHead.add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 0, 40, 40));
 
         btnLogout.setBackground(new java.awt.Color(255, 255, 255));
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logout_rounded_left_35px_2.png"))); // NOI18N
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/logout_rounded_left_35px_2.png"))); // NOI18N
         btnLogout.setText(" ");
         btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -325,7 +330,7 @@ public class MainControl extends javax.swing.JFrame {
         panelNextPage.add(lbPageCount, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 35, 35));
 
         btnDoublePrev.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_left_30px_1.png"))); // NOI18N
+        btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_double_left_30px_1.png"))); // NOI18N
         btnDoublePrev.setText("jLabel2");
         btnDoublePrev.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -341,7 +346,7 @@ public class MainControl extends javax.swing.JFrame {
         panelNextPage.add(btnDoublePrev, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, 35, 35));
 
         btnNext.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_forward_30px_3.png"))); // NOI18N
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_forward_30px_3.png"))); // NOI18N
         btnNext.setText("jLabel2");
         btnNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -357,7 +362,7 @@ public class MainControl extends javax.swing.JFrame {
         panelNextPage.add(btnNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, 35, 35));
 
         btnDoubleNext.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnDoubleNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_right_30px_1.png"))); // NOI18N
+        btnDoubleNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_double_right_30px_1.png"))); // NOI18N
         btnDoubleNext.setText("jLabel2");
         btnDoubleNext.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -373,7 +378,7 @@ public class MainControl extends javax.swing.JFrame {
         panelNextPage.add(btnDoubleNext, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 35, 35));
 
         btnPrev.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_back_30px_1.png"))); // NOI18N
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_back_30px_1.png"))); // NOI18N
         btnPrev.setText("jLabel2");
         btnPrev.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -388,7 +393,7 @@ public class MainControl extends javax.swing.JFrame {
         });
         panelNextPage.add(btnPrev, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 35, 35));
 
-        getContentPane().add(panelNextPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 707, 1320, 55));
+        getContentPane().add(panelNextPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 707, 1315, 55));
 
         panelFunction.setBackground(new java.awt.Color(6, 18, 52));
         panelFunction.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -396,7 +401,7 @@ public class MainControl extends javax.swing.JFrame {
         btnSortImgae.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         btnSortImgae.setForeground(new java.awt.Color(204, 204, 204));
         btnSortImgae.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_sort_down_30px_1.png"))); // NOI18N
+        btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_sort_down_30px_1.png"))); // NOI18N
         btnSortImgae.setText("Mới Nhất");
         btnSortImgae.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -413,7 +418,7 @@ public class MainControl extends javax.swing.JFrame {
         btnThemAnh.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         btnThemAnh.setForeground(new java.awt.Color(204, 204, 204));
         btnThemAnh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        btnThemAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_add_image_30px_1.png"))); // NOI18N
+        btnThemAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_add_image_30px_1.png"))); // NOI18N
         btnThemAnh.setText("Thêm Mới");
         btnThemAnh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -434,7 +439,7 @@ public class MainControl extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFunctionLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addComponent(btnThemAnh, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1006, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 979, Short.MAX_VALUE)
                 .addComponent(btnSortImgae, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
@@ -448,7 +453,7 @@ public class MainControl extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(panelFunction, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 135, -1, 50));
+        getContentPane().add(panelFunction, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 135, 1315, 50));
 
         panelBackGround.setkBorderRadius(0);
         panelBackGround.setkEndColor(new java.awt.Color(25, 30, 49));
@@ -461,11 +466,11 @@ public class MainControl extends javax.swing.JFrame {
         panelHinhAnh.setMinimumSize(new java.awt.Dimension(1225, 527));
         panelHinhAnh.setName(""); // NOI18N
         panelHinhAnh.setOpaque(false);
-        panelHinhAnh.setPreferredSize(new java.awt.Dimension(1225, 527));
+        panelHinhAnh.setPreferredSize(new java.awt.Dimension(1315, 527));
         panelHinhAnh.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 45, 45));
         panelBackGround.add(panelHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -40, 1315, 620));
 
-        getContentPane().add(panelBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1320, 530));
+        getContentPane().add(panelBackGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 1315, 530));
 
         pack();
         setLocationRelativeTo(null);
@@ -485,13 +490,13 @@ public class MainControl extends javax.swing.JFrame {
     private void btnChinhSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseEntered
         // TODO add your handling code here:
 
-        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_edit_property_25px_1.png")));
+        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_edit_property_25px_1.png")));
         btnChinhSua.validate();
     }//GEN-LAST:event_btnChinhSuaMouseEntered
 
     private void btnChinhSuaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseExited
         // TODO add your handling code here:
-        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_edit_property_25px.png")));
+        btnChinhSua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_edit_property_25px.png")));
         btnChinhSua.validate();
     }//GEN-LAST:event_btnChinhSuaMouseExited
 
@@ -535,14 +540,14 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
         // TODO add your handling code here:
-        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_minus_35px_1.png")));
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_minus_35px_1.png")));
         btnMinimize.validate();
     }//GEN-LAST:event_btnMinimizeMouseEntered
 
     private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
 
         // TODO add your handling code here:
-        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_minus_35px.png")));
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_minus_35px.png")));
         btnMinimize.validate();
     }//GEN-LAST:event_btnMinimizeMouseExited
     // </editor-fold> //done
@@ -558,13 +563,13 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
         // TODO add your handling code here:
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_multiply_35px_3.png")));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_multiply_35px_3.png")));
         btnClose.validate();
     }//GEN-LAST:event_btnCloseMouseEntered
 
     private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
         // TODO add your handling code here:
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_multiply_35px_2.png")));
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_multiply_35px_2.png")));
         btnClose.validate();
     }//GEN-LAST:event_btnCloseMouseExited
     // </editor-fold> //done
@@ -573,14 +578,14 @@ public class MainControl extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (NEWEST) {
             NEWEST = false;
-            btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_sort_up_30px_1.png")));
+            btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_sort_up_30px_1.png")));
             btnSortImgae.setText("Cũ Nhất");
             sortLatestList();
             DisplayFirstPageImage();
             btnSortImgae.validate();
         } else {
             NEWEST = true;
-            btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_sort_down_30px_1.png")));
+            btnSortImgae.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_sort_down_30px_1.png")));
             btnSortImgae.setText("Mới Nhất");
             sortFirstList();
             DisplayFirstPageImage();
@@ -653,13 +658,13 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnDoubleNextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoubleNextMouseEntered
         // TODO add your handling code here:
-        btnDoubleNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_right_30px.png")));
+        btnDoubleNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_double_right_30px.png")));
         btnDoubleNext.validate();
     }//GEN-LAST:event_btnDoubleNextMouseEntered
 
     private void btnDoubleNextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoubleNextMouseExited
         // TODO add your handling code here:
-        btnDoubleNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_right_30px_1.png")));
+        btnDoubleNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_double_right_30px_1.png")));
         btnDoubleNext.validate();
     }//GEN-LAST:event_btnDoubleNextMouseExited
 
@@ -700,13 +705,13 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnNextMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseEntered
         // TODO add your handling code here:
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_forward_30px.png")));
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_forward_30px.png")));
         btnNext.validate();
     }//GEN-LAST:event_btnNextMouseEntered
 
     private void btnNextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseExited
         // TODO add your handling code here:
-        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_forward_30px_3.png")));
+        btnNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_forward_30px_3.png")));
         btnNext.validate();
     }//GEN-LAST:event_btnNextMouseExited
 
@@ -724,26 +729,26 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnPrevMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseExited
         // TODO add your handling code here:
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_back_30px_1.png")));
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_back_30px_1.png")));
         btnPrev.validate();
     }//GEN-LAST:event_btnPrevMouseExited
 
     private void btnPrevMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPrevMouseEntered
         // TODO add your handling code here:
-        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_back_30px.png")));
+        btnPrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_back_30px.png")));
         btnPrev.validate();
     }//GEN-LAST:event_btnPrevMouseEntered
     // </editor-fold> //done
 // <editor-fold defaultstate="collapsed" desc="Button Đến trang đầu">
     private void btnDoublePrevMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoublePrevMouseExited
         // TODO add your handling code here:
-        btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_left_30px_1.png")));
+        btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_double_left_30px_1.png")));
         btnDoublePrev.validate();
     }//GEN-LAST:event_btnDoublePrevMouseExited
 
     private void btnDoublePrevMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDoublePrevMouseEntered
         // TODO add your handling code here:
-        btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_double_left_30px.png")));
+        btnDoublePrev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_double_left_30px.png")));
         btnDoublePrev.validate();
     }//GEN-LAST:event_btnDoublePrevMouseEntered
 
