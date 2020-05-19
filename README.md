@@ -7,7 +7,7 @@
 - Thay đổi tài khoản,mật khẩu, trong ServerDB.ConnectionDB
 **Một số hình ảnh về giao diện**
 -Giao Diện Đăng Nhập
-<img src="https://imgur.com/3mS9CuZ">
+<img src="https://i.imgur.com/3mS9CuZ">
 -Giao Diện Chính
-<img src="https://imgur.com/HTqFYFO">
+<img src="https://i.imgur.com/HTqFYFO">
 
