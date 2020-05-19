@@ -203,13 +203,13 @@ public class MainControl extends javax.swing.JFrame {
     private void initComponents() {
 
         panelHead = new javax.swing.JPanel();
-        kGradientPanel1 = new keeptoo.KGradientPanel();
         lbTenTaiKhoan = new javax.swing.JLabel();
         lbDungLuong = new javax.swing.JLabel();
         btnChinhSua = new javax.swing.JLabel();
         btnClose = new javax.swing.JLabel();
         btnMinimize = new javax.swing.JLabel();
         btnLogout = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lbBackground = new javax.swing.JLabel();
         panelNextPage = new javax.swing.JPanel();
         lbPageCount = new javax.swing.JLabel();
@@ -224,31 +224,13 @@ public class MainControl extends javax.swing.JFrame {
         panelHinhAnh = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1315, 760));
         setMinimumSize(new java.awt.Dimension(1315, 760));
-        setPreferredSize(new java.awt.Dimension(1315, 760));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelHead.setMaximumSize(new java.awt.Dimension(1314, 135));
         panelHead.setMinimumSize(new java.awt.Dimension(1314, 135));
         panelHead.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        kGradientPanel1.setkBorderRadius(125);
-        kGradientPanel1.setOpaque(false);
-
-        javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
-        kGradientPanel1.setLayout(kGradientPanel1Layout);
-        kGradientPanel1Layout.setHorizontalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        kGradientPanel1Layout.setVerticalGroup(
-            kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-
-        panelHead.add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 5, 120, 120));
 
         lbTenTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 26)); // NOI18N
         lbTenTaiKhoan.setForeground(new java.awt.Color(204, 204, 204));
@@ -323,7 +305,11 @@ public class MainControl extends javax.swing.JFrame {
         });
         panelHead.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 0, 40, 40));
 
-        lbBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/CoverPage.png"))); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/circle-cropped.png"))); // NOI18N
+        panelHead.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 120, 120));
+
+        lbBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/CoverPage.png"))); // NOI18N
         panelHead.add(lbBackground, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1315, 135));
 
         getContentPane().add(panelHead, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1315, 135));
@@ -785,7 +771,7 @@ public class MainControl extends javax.swing.JFrame {
     private javax.swing.JLabel btnPrev;
     private javax.swing.JLabel btnSortImgae;
     private javax.swing.JLabel btnThemAnh;
-    private keeptoo.KGradientPanel kGradientPanel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbBackground;
     private javax.swing.JLabel lbDungLuong;
     private javax.swing.JLabel lbPageCount;
