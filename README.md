@@ -6,6 +6,7 @@
 - Dùng file quanlyhinhanh.sql để tạo lập database
 - Thay đổi tài khoản,mật khẩu, trong ServerDB.ConnectionDB
 - Các tài khoản mặc định : ( hoangbeo69,hoangbeo69),(tientung,tientung),(tiendung,tiendung)
+
 **Một số hình ảnh về giao diện**
 - Giao Diện Đăng Nhập
 
