@@ -54,12 +54,6 @@ public class XoaAnhData {
             }
         } catch (IOException ex) {
             Logger.getLogger(XoaAnhData.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                input.close();
-            } catch (IOException ex) {
-                Logger.getLogger(XoaAnhData.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return false;
     }

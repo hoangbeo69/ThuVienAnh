@@ -10,7 +10,7 @@ import BackEndData.GuiHinhAnhData;
 import BackEndData.HinhAnhData;
 import BackEndData.ListHinhAnhData;
 import BackEndData.XoaAnhData;
-import GiaoDien.DangNhap.DangNhapConnection;
+import BackEndData.DangNhapConnection;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -48,7 +48,7 @@ public class Client {
             return false;
         }
     }
-
+    //hàm gửi tài khoản mật khẩu về server
     public String dangNhap(String taiKhoan, String matKhau) {
         if (sendMessToServer("dang_nhap")) {
             String id = null;
@@ -60,7 +60,7 @@ public class Client {
         }
         return null;
     }
-
+    //hàm lấy danh sách ảnh từ server
     public ArrayList<HinhAnh> getDanhSachAnh() {
         ArrayList<HinhAnh> dsha = null;
         if (sendMessToServer("gui_list_anh")) {
@@ -72,7 +72,7 @@ public class Client {
         }
         return dsha;
     }
-
+    // hàm lấy ảnh từ server
     synchronized public byte [] getHinhAnh(String idAnh) {
         byte [] data = null;
         if (sendMessToServer("gui_anh")) {
@@ -83,7 +83,7 @@ public class Client {
         }
         return data;
     }
-
+    // hàm thêm ảnh và gửi ảnh đó đến server
     boolean guiAnhMoi(HinhAnh ha) {
         if (sendMessToServer("them_anh")) {
             GuiHinhAnhData ghad = new GuiHinhAnhData(userID, ha, socket);
@@ -97,7 +97,7 @@ public class Client {
         }
         return false;
     }
-
+    // hàm xóa ảnh 
     public  boolean xoaHinhAnh(String idAnh) {
         if(sendMessToServer("xoa_anh")){
             XoaAnhData xadt = new XoaAnhData(userID,idAnh,socket);

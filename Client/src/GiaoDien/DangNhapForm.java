@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GiaoDien.DangNhap;
+package GiaoDien;
 
 import GiaoDien.Client;
 import GiaoDien.MainControl;
@@ -94,7 +94,7 @@ public class DangNhapForm extends javax.swing.JFrame {
         btnClose.setBackground(new java.awt.Color(255, 255, 255));
         btnClose.setForeground(new java.awt.Color(255, 255, 255));
         btnClose.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/multiply_30px.png"))); // NOI18N
+        btnClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/multiply_30px.png"))); // NOI18N
         btnClose.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnClose.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         btnClose.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,7 +111,7 @@ public class DangNhapForm extends javax.swing.JFrame {
         getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 40, 40));
 
         btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/minus_math_30px.png"))); // NOI18N
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png"))); // NOI18N
         btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizeMouseClicked(evt);
@@ -134,6 +134,7 @@ public class DangNhapForm extends javax.swing.JFrame {
         lbDangKyTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lbDangKyTaiKhoan.setForeground(new java.awt.Color(102, 102, 102));
         lbDangKyTaiKhoan.setText("Đăng Kí Tài Khoản");
+        lbDangKyTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbDangKyTaiKhoan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbDangKyTaiKhoanMouseClicked(evt);
@@ -170,9 +171,16 @@ public class DangNhapForm extends javax.swing.JFrame {
         lbDangNhap.setForeground(new java.awt.Color(51, 51, 51));
         lbDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbDangNhap.setText("Đăng Nhập");
+        lbDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbDangNhapMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lbDangNhapMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lbDangNhapMouseExited(evt);
             }
         });
         btnDangNhap.add(lbDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(-6, -4, 180, 60));
@@ -181,7 +189,7 @@ public class DangNhapForm extends javax.swing.JFrame {
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\HiHi\\Desktop\\ThuVienAnh\\Client\\src\\image\\2608782.jpg")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/2608782.jpg"))); // NOI18N
         jLabel3.setNextFocusableComponent(this);
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 540));
 
@@ -247,16 +255,19 @@ public class DangNhapForm extends javax.swing.JFrame {
     //sự kiện đưa chuột vào btn đăng nhập
     private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
         // TODO add your handling code here:
-        btnDangNhap.setkFillBackground(true);
-        btnDangNhap.setkFillBackground(true);
         lbDangNhap.setForeground(new Color(102, 102, 102));
+        btnDangNhap.setkEndColor(new Color(102, 102, 102));
+        btnDangNhap.setkStartColor(new Color(255, 255, 255));
+        btnDangNhap.setkFillBackground(true);
 
     }//GEN-LAST:event_btnDangNhapMouseEntered
     //sự kiện đưa chuột ra khỏi btn đăng nhập
     private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited
         // TODO add your handling code here:
-        btnDangNhap.setkFillBackground(false);
         lbDangNhap.setForeground(new Color(51, 51, 51));
+        btnDangNhap.setkEndColor(new Color(255, 255, 255));
+        btnDangNhap.setkStartColor(new Color(102, 102, 102));
+        btnDangNhap.setkFillBackground(false);
 
     }//GEN-LAST:event_btnDangNhapMouseExited
     //sự kiện khi click chuột đăng nhập
@@ -294,6 +305,22 @@ public class DangNhapForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_lbDangNhapMouseClicked
+
+    private void lbDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangNhapMouseEntered
+        // TODO add your handling code here:
+        lbDangNhap.setForeground(new Color(102, 102, 102));
+        btnDangNhap.setkEndColor(new Color(255, 255, 255));
+        btnDangNhap.setkStartColor(new Color(102, 102, 102));
+        btnDangNhap.setkFillBackground(true);
+    }//GEN-LAST:event_lbDangNhapMouseEntered
+
+    private void lbDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangNhapMouseExited
+        // TODO add your handling code here:
+        lbDangNhap.setForeground(new Color(51, 51, 51));
+        btnDangNhap.setkEndColor(new Color(255, 255, 255));
+        btnDangNhap.setkStartColor(new Color(102, 102, 102));
+        btnDangNhap.setkFillBackground(false);
+    }//GEN-LAST:event_lbDangNhapMouseExited
 
     /**
      * @param args the command line arguments

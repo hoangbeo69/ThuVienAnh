@@ -95,4 +95,11 @@ public class ServerDB {
         connection.checkConnect();
         return success;
     }
+
+    public boolean xoaAnh(String id, String idAnh) {
+        connection = new ConnectionDB();
+        boolean success  = connection.sqlUpdate("DELETE FROM hinh_anh WHERE ha_id = '"+idAnh+"' AND user_id='"+id+"';");
+        connection.closeConnect();
+        return success;
+    }
 }

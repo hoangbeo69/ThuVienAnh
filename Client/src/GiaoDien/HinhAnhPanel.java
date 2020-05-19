@@ -68,10 +68,6 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         lbXoaAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/delete_25px.png"))); // NOI18N
         lbXoaAnh.setVisible(false);
         this.add(lbXoaAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 30, 30));
-
-//        lbHinhAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imageDemo/65954627_1025536354316241_7630705637017518080_n.jpg"))); // NOI18N
-//        lbHinhAnh.setText("jLabel1");
-//        this.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
         lbTenAnh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lbTenAnh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbTenAnh.setText(tenAnh);
@@ -124,6 +120,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     }
 //###########################################
     //
+    //sự kiện khi di chuột vào panel ảnh
 
     private void MouseEnteredPN(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
@@ -136,6 +133,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.setkStartColor(new java.awt.Color(103, 104, 111));
     }
 
+    //sự kiện khi di chuột ra khỏi panel ảnh
     private void MouseExitedPN(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         lbTaiAnh.setVisible(false);
@@ -147,12 +145,13 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.setkStartColor(new java.awt.Color(71, 74, 81));
     }
 
+    //sự kiện khi nhấp chuột vào ảnh
     private void MouseClickedPN(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
     }
 
 //    #########################################
-    //sự kiện của btn tải ảnh
+    //sự kiện khi di chuyển chuột vào button tải ảnh
     private void MouseEnteredTA(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         lbTaiAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -161,6 +160,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.setkStartColor(new java.awt.Color(103, 104, 111));
     }
 
+    //sự kiện khi di chuyển chuột ra khỏi button tải ảnh
     private void MouseClickedTA(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         String pathFile = layDuongDanSave();
@@ -172,7 +172,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     }
 
 //    #########################################
-    //sự kiện của btn xóa ảnh
+    //sự kiện khi di chuột vào button xóa ảnh
     private void MouseEnteredXA(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
         lbXoaAnh.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -181,19 +181,21 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.setkStartColor(new java.awt.Color(103, 104, 111));
     }
 
-//    private void MouseClickedXA(java.awt.event.MouseEvent evt) {
-//        // TODO add your handling code here:
-//        int x = JOptionPane.showConfirmDialog(null, "Bạn Xác Nhận Muốn Xóa", "Xóa Ảnh", JOptionPane.YES_NO_OPTION);
-//        if (x == 0) {
-//            if (MainControl.deleteImage(idAnh)) {
-//                JOptionPane.showMessageDialog(null, "Xóa Ảnh Thành Công", "Xóa Ảnh", JOptionPane.INFORMATION_MESSAGE);
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Xóa Ảnh Thành Công", "Xóa Ảnh", JOptionPane.INFORMATION_MESSAGE);
-//            }
-//
-//        }
-//    }
+    //sự kiện khi di chuột ra khỏi button xóa ảnh
+    private void MouseClickedXA(java.awt.event.MouseEvent evt) {
+        // TODO add your handling code here:
+        int x = JOptionPane.showConfirmDialog(null, "Bạn Xác Nhận Muốn Xóa", "Xóa Ảnh", JOptionPane.YES_NO_OPTION);
+        if (x == 0) {
+            if (MainControl.deleteImage(idAnh)) {
+                JOptionPane.showMessageDialog(null, "Xóa Ảnh Thành Công", "Xóa Ảnh", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Xóa Ảnh Thành Công", "Xóa Ảnh", JOptionPane.INFORMATION_MESSAGE);
+            }
 
+        }
+    }
+
+    //hàm set ảnh cho panel
     public void setImageDisplay(byte[] data) {
         BufferedImage bufImg = null;
         this.arrayImage = data;
@@ -212,6 +214,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
 
     }
 
+    //hàm mở cửa sổ chọn đường dẫn để save
     private String layDuongDanSave() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Chọn Hình Ảnh Mới"); //tiêu đề
@@ -228,10 +231,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         return null;
     }
 
-    public String getName() {
-        return name;
-    }
-
+    //hàm ghi file vào đường dẫn đã đc chọn
     public boolean writeToFile(String path) {
         try {
             BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(new File(path)));
@@ -246,4 +246,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         return false;
     }
 
+    public String getName() {
+        return name;
+    }
 }

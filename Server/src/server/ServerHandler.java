@@ -9,6 +9,7 @@ import ServerBUS.DangNhapBUS;
 import ServerBUS.HinhAnhBUS;
 import ServerBUS.ListAnhBUS;
 import ServerBUS.ThemAnhBUS;
+import ServerBUS.XoaAnhBUS;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -83,5 +84,12 @@ public class ServerHandler {
     public void themAnh() {
         ThemAnhBUS themanh = new ThemAnhBUS(this.socket);
         themanh.layDuLieuCliet();
+    }
+    public void xoaAnh(){
+        XoaAnhBUS xoaanh = new XoaAnhBUS(this.socket);
+        if(xoaanh.layDuLieuClient()){
+            xoaanh.traDuLieuClient();
+        }
+        
     }
 }

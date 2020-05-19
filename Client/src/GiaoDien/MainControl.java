@@ -6,12 +6,6 @@
 package GiaoDien;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import keeptoo.KTextField;
 import BackEndClass.HinhAnh;
 import java.io.File;
 import java.util.ArrayList;
@@ -32,11 +26,13 @@ public class MainControl extends javax.swing.JFrame {
      * Creates new form MainControl
      */
     static public Client client;
-    private ArrayList<HinhAnh> danhSachAnh;
+
+    static private ArrayList<HinhAnh> danhSachAnh;
     private Boolean NEWEST = true;
     private int currentPage = 1;
     private int currentDungLuong = 0;
 
+//Tạo Giao diện chính của chương trình
     public MainControl(Client client, String taiKhoan, String id) {
         this.client = client;
         /* Set the Nimbus look and feel */
@@ -61,29 +57,29 @@ public class MainControl extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         this.setUndecorated(true);
         this.setSize(1315, 760);
         this.initComponents();
-
-        danhSachAnh = client.getDanhSachAnh();
+        lbTenTaiKhoan.setText(taiKhoan); //set tên tài khoản vào lbTenTaiKhoan
+        danhSachAnh = client.getDanhSachAnh(); //nhận danh sách ảnh từ server
         if (danhSachAnh.size() != 0) {
             setDungLuong();
             sortFirstList();
             newDisplayImage(0, 7);
         }
-        lbTenTaiKhoan.setText(taiKhoan);
     }
 
+    //kiểm tra dung lượng đã sử dụng
     public void setDungLuong() {
         for (HinhAnh ha : danhSachAnh) {
             currentDungLuong += ha.getDungluong();
         }
         float percent = currentDungLuong / 104857600;
-        lbDungLuong.setText("Dung lượng còn trống " +  percent * 100 + " của 100 MB");
+        lbDungLuong.setText("Dung lượng còn trống " + percent * 100 + " của 100 MB");
     }
 
-//show list những ảnh page 1
+    //show list những ảnh tại page 1
     public void DisplayFirstPageImage() {
         if (NEWEST) {
             sortFirstList();
@@ -99,13 +95,13 @@ public class MainControl extends javax.swing.JFrame {
         }
     }
 
-//đặt thứ tự trang
+    //thay đổi lbCountTrang khi nhấn next hoặc prev
     public void setPageCount(int count) {
         lbPageCount.setText("" + count);
         lbPageCount.validate();
     }
 
-//lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last    
+    //lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last    
     public void newDisplayImage(int first, int last) {
 
         //xóa tất cả phân tử có trong panelHinhanh và vẽ lại từ đầu
@@ -119,15 +115,15 @@ public class MainControl extends javax.swing.JFrame {
         }
     }
 
-//tạo mới panel ảnh và thêm vào giao diện
+    //tạo mới panel ảnh và thêm vào giao diện
     public void addNewPanelAnh(HinhAnh ha) {
         HinhAnhPanel hap = new HinhAnhPanel(ha.getId(), ha.getName(), ha.getDungluong() + "", ha.getDate().toString());
         panelHinhAnh.add(hap);
 
-        new addImageToPanel(hap).start();
+        new addImageToPanel(hap).start(); // cho chạy 1 luồng để set hình ảnh cho panel
     }
 
-// luồng hàm set ảnh cho panel ảnh
+    // luồng hàm set ảnh cho panel ảnh
     class addImageToPanel implements Runnable {
 
         HinhAnhPanel hap;
@@ -139,12 +135,12 @@ public class MainControl extends javax.swing.JFrame {
 
         @Override
         public void run() {
-            byte[] data = client.getHinhAnh(hap.getIdAnh());
-            if( data.length != 0){
-            data = client.getHinhAnh(hap.getIdAnh());
-            hap.setImageDisplay(data);
-            hap.validate();
-            }else{
+            byte[] data = client.getHinhAnh(hap.getIdAnh()); //lấy byte data của image
+            if (data.length != 0) {
+                data = client.getHinhAnh(hap.getIdAnh());
+                hap.setImageDisplay(data);
+                hap.validate();
+            } else {
                 System.out.println("Không nhận đc data");
             }
         }
@@ -157,7 +153,18 @@ public class MainControl extends javax.swing.JFrame {
         }
     }
 
-    //sắp xếp ngày mới đễn cũ
+    //Xóa 1 ảnh 
+    static boolean deleteImage(String idAnh) {
+        if (client.xoaHinhAnh(idAnh)) {
+            setDanhSachAnh(client.getDanhSachAnh());
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    //sắp xếp danh sách ảnh theo ngày mới đễn cũ
     public void sortFirstList() {
         Collections.sort(danhSachAnh, new Comparator<HinhAnh>() {
             @Override
@@ -174,7 +181,7 @@ public class MainControl extends javax.swing.JFrame {
         );
     }
 
-    //sắp xếp ngày cũ đến mới
+    //sắp xếp danh sách ảnh theo ngày cũ đến mới
     public void sortLatestList() {
         Collections.sort(danhSachAnh, new Comparator<HinhAnh>() {
             @Override
@@ -190,7 +197,6 @@ public class MainControl extends javax.swing.JFrame {
         }
         );
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -484,10 +490,11 @@ public class MainControl extends javax.swing.JFrame {
         return danhSachAnh;
     }
 
-    public void setDanhSachAnh(ArrayList<HinhAnh> danhSachAnh) {
-        this.danhSachAnh = danhSachAnh;
+    static void setDanhSachAnh(ArrayList<HinhAnh> danhSanh) {
+        danhSachAnh = danhSanh;
     }
-//        //</editor-fold>
+
+//        //</editor-fold> //done
 // <editor-fold defaultstate="collapsed" desc="Button chỉnh sửa thông tin">     
     private void btnChinhSuaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseEntered
         // TODO add your handling code here:
@@ -510,6 +517,16 @@ public class MainControl extends javax.swing.JFrame {
     //btn đăng xuất
     private void btnLogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseClicked
         // TODO add your handling code here:
+        int option = JOptionPane.showConfirmDialog(null, "Bạn Có Chắc Chắn Đăng Xuất", "Đăng Xuất", JOptionPane.YES_NO_OPTION);
+        if (option == 0) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new DangNhapForm().setVisible(true);
+                }
+            });
+            this.dispose();
+            this.disable();
+        }
     }//GEN-LAST:event_btnLogoutMouseClicked
 
     private void btnLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseEntered
@@ -523,11 +540,11 @@ public class MainControl extends javax.swing.JFrame {
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logout_rounded_left_35px_2.png")));
         btnLogout.validate();
     }//GEN-LAST:event_btnLogoutMouseExited
-    // </editor-fold>  
+    // </editor-fold>  //done
 // <editor-fold defaultstate="collapsed" desc="Button Thu gọn cửa sổ"> 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
         // TODO add your handling code here:
-
+        this.setState(this.ICONIFIED);
     }//GEN-LAST:event_btnMinimizeMouseClicked
 
     private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
@@ -542,12 +559,15 @@ public class MainControl extends javax.swing.JFrame {
         btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_minus_35px.png")));
         btnMinimize.validate();
     }//GEN-LAST:event_btnMinimizeMouseExited
-    // </editor-fold> 
+    // </editor-fold> //done
 // <editor-fold defaultstate="collapsed" desc="Button Tắt cửa sổ chương trình">
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         // TODO add your handling code here:
-        this.dispose();
-        this.disable();
+        int x = JOptionPane.showConfirmDialog(null, "Bạn Có Chắc Chắn Muốn Thoát", "Thoát", JOptionPane.YES_NO_OPTION);
+        if (x == 0) {
+            this.dispose();
+            this.disable();
+        }
     }//GEN-LAST:event_btnCloseMouseClicked
 
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
@@ -752,40 +772,8 @@ public class MainControl extends javax.swing.JFrame {
             panelHinhAnh.validate();
         }
     }//GEN-LAST:event_btnDoublePrevMouseClicked
-    // </editor-fold> //done
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                MainControl main = new MainControl().setVisible(true);
-//            }
-//        });
-    }
+    // </editor-fold> // done
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnChinhSua;
     private javax.swing.JLabel btnClose;
