@@ -113,7 +113,7 @@ public class DangNhapForm extends javax.swing.JFrame {
                 btnCloseMouseExited(evt);
             }
         });
-        getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 40, 40));
+        getContentPane().add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 0, 40, 40));
 
         btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png"))); // NOI18N
@@ -128,7 +128,7 @@ public class DangNhapForm extends javax.swing.JFrame {
                 btnMinimizeMouseExited(evt);
             }
         });
-        getContentPane().add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 10, 40, 40));
+        getContentPane().add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, 40));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 290, 10));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 290, -1));
 
