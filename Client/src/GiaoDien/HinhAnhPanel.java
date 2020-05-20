@@ -148,6 +148,7 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
     //sự kiện khi nhấp chuột vào ảnh
     private void MouseClickedPN(java.awt.event.MouseEvent evt) {
         // TODO add your handling code here:
+        new FullScreenImage(arrayImage).setVisible(true);
     }
 
 //    #########################################
@@ -201,12 +202,11 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
         this.arrayImage = data;
         try {
             bufImg = ImageIO.read(new ByteArrayInputStream(data));
-            ImageIcon imageIcon = new ImageIcon(bufImg);
 //            int height = 180;
 //            int width = 273;
-            Image img2 = imageIcon.getImage().getScaledInstance(273, 180, 1);
-            lbHinhAnh.setIcon(new ImageIcon(img2));
-            lbHinhAnh.setText("Image");
+            
+            ImageIcon  img = new ImageIcon(bufImg.getScaledInstance(273, 180, Image.SCALE_FAST));
+            lbHinhAnh.setIcon(img);
             this.add(lbHinhAnh, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 273, 180));
         } catch (IOException ex) {
             Logger.getLogger(HinhAnhPanel.class.getName()).log(Level.SEVERE, null, ex);

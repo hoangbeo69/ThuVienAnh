@@ -59,13 +59,13 @@ public class MainControl extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(MainControl.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         this.setUndecorated(true);
+        this.initComponents();   
         this.setSize(1315, 755);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setBackground(new Color(0, 0, 0, 0));
-        this.initComponents();
+       
         lbTenTaiKhoan.setText(taiKhoan); //set tên tài khoản vào lbTenTaiKhoan
         danhSachAnh = client.getDanhSachAnh(); //nhận danh sách ảnh từ server
         if (danhSachAnh.size() != 0) {
