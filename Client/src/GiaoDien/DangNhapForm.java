@@ -62,6 +62,11 @@ public class DangNhapForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbTaiKhoan.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -321,6 +326,20 @@ public class DangNhapForm extends javax.swing.JFrame {
         btnDangNhap.setkStartColor(new Color(102, 102, 102));
         btnDangNhap.setkFillBackground(false);
     }//GEN-LAST:event_lbDangNhapMouseExited
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

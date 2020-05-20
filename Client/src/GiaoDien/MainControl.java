@@ -60,12 +60,12 @@ public class MainControl extends javax.swing.JFrame {
         }
         //</editor-fold>
         this.setUndecorated(true);
-        this.initComponents();   
+        this.initComponents();
         this.setSize(1315, 755);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setBackground(new Color(0, 0, 0, 0));
-       
+
         lbTenTaiKhoan.setText(taiKhoan); //set tên tài khoản vào lbTenTaiKhoan
         danhSachAnh = client.getDanhSachAnh(); //nhận danh sách ảnh từ server
         if (danhSachAnh.size() != 0) {
@@ -231,6 +231,11 @@ public class MainControl extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1315, 760));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelHead.setMaximumSize(new java.awt.Dimension(1314, 135));
@@ -763,6 +768,20 @@ public class MainControl extends javax.swing.JFrame {
             panelHinhAnh.validate();
         }
     }//GEN-LAST:event_btnDoublePrevMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
     // </editor-fold> // done
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

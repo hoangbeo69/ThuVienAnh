@@ -51,13 +51,13 @@ public class FullScreenImage extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        this.setSize(dim.width -10,dim.height -10);
-        lbAnh.setSize(dim.width -10 ,dim.height -10);
-        this.setBackground(new Color(0,0,0,0));
+        this.setSize(dim.width - 10, dim.height - 10);
+        lbAnh.setSize(dim.width - 10, dim.height - 10);
+        this.setBackground(new Color(0, 0, 0, 0));
         BufferedImage img;
         try {
             img = ImageIO.read(new ByteArrayInputStream(data));
-            ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(dim.width-10,dim.height-10, Image.SCALE_AREA_AVERAGING));
+            ImageIcon imageIcon = new ImageIcon(img.getScaledInstance(dim.width - 10, dim.height - 10, Image.SCALE_AREA_AVERAGING));
             lbAnh.setIcon(imageIcon);
         } catch (IOException ex) {
             Logger.getLogger(FullScreenImage.class.getName()).log(Level.SEVERE, null, ex);
@@ -80,6 +80,11 @@ public class FullScreenImage extends javax.swing.JFrame {
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
+            }
+        });
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -109,41 +114,21 @@ public class FullScreenImage extends javax.swing.JFrame {
         this.disable();
     }//GEN-LAST:event_formMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FullScreenImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FullScreenImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FullScreenImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FullScreenImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_formWindowOpened
 
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new FullScreenImage().setVisible(true);
-//            }
-//        });
-    }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lbAnh;
     // End of variables declaration//GEN-END:variables
