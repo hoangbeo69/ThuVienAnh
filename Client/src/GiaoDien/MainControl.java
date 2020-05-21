@@ -527,13 +527,13 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnLogoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseEntered
         // TODO add your handling code here:
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8_logout_rounded_left_35px_3.png")));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_logout_rounded_left_35px_3.png")));
         btnLogout.validate();
     }//GEN-LAST:event_btnLogoutMouseEntered
 
     private void btnLogoutMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMouseExited
         // TODO add your handling code here:
-        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/logout_rounded_left_35px_2.png")));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/logout_rounded_left_35px_2.png")));
         btnLogout.validate();
     }//GEN-LAST:event_btnLogoutMouseExited
     // </editor-fold>  //done

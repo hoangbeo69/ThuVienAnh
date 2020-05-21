@@ -255,6 +255,13 @@ public class DangNhapForm extends javax.swing.JFrame {
     //sự kiện khi click chuột đăng kí tài khoản
     private void lbDangKyTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangKyTaiKhoanMouseClicked
         // TODO add your handling code here:
+                java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DangKyForm().setVisible(true);
+            }
+        });
+        this.dispose();
+        this.disable();
 
     }//GEN-LAST:event_lbDangKyTaiKhoanMouseClicked
     //sự kiện đưa chuột vào btn đăng nhập
