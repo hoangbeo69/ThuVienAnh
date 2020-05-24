@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ServerBUS;
+package ServerClass;
 import java.sql.Date;
 /**
  *
  * @author HiHi
  */
 public class HinhAnh {
-
+    
     String id;
     String name;
     int dungluong;

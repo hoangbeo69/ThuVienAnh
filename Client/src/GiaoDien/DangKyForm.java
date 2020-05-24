@@ -5,10 +5,18 @@
  */
 package GiaoDien;
 
+import BackEndClass.TaiKhoan;
+import BackEndClass.ThongTin;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Arrays;
 import java.util.Date;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,7 +35,12 @@ public class DangKyForm extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setBackground(new Color(0, 0, 0, 0));
-
+        tfNgaySinh.setFormats("yyyy-MM-dd");
+        tfNgaySinh.getEditor().setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
+        tfNgaySinh.getEditor().setOpaque(false);
+        JButton btn_pick = (JButton) tfNgaySinh.getComponent(1);
+        btn_pick.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png")));
+        
     }
 
     /**
@@ -57,11 +70,11 @@ public class DangKyForm extends javax.swing.JFrame {
         lbMatKhau = new javax.swing.JLabel();
         jSeparator11 = new javax.swing.JSeparator();
         lbXacNhanMatKhau = new javax.swing.JLabel();
+        lbThongBao = new javax.swing.JLabel();
         tfMatKhau = new javax.swing.JPasswordField();
         tfXNMatKhau = new javax.swing.JPasswordField();
-        lbThongBao = new javax.swing.JLabel();
         tfNgaySinh = new org.jdesktop.swingx.JXDatePicker();
-        btnMinimize2 = new javax.swing.JLabel();
+        btnMinimize = new javax.swing.JLabel();
         lbBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -152,11 +165,11 @@ public class DangKyForm extends javax.swing.JFrame {
         getContentPane().add(lbTenNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 190, 30));
 
         tfTenNguoiDung.setBackground(new java.awt.Color(51, 51, 51));
-        tfTenNguoiDung.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        tfTenNguoiDung.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         tfTenNguoiDung.setForeground(new java.awt.Color(51, 51, 51));
         tfTenNguoiDung.setBorder(null);
         tfTenNguoiDung.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        tfTenNguoiDung.setNextFocusableComponent(tfMatKhau);
+        tfTenNguoiDung.setNextFocusableComponent(tfEmail);
         tfTenNguoiDung.setOpaque(false);
         getContentPane().add(tfTenNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 290, 35));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, 290, -1));
@@ -167,11 +180,11 @@ public class DangKyForm extends javax.swing.JFrame {
         getContentPane().add(lbEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 190, 30));
 
         tfEmail.setBackground(new java.awt.Color(51, 51, 51));
-        tfEmail.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        tfEmail.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         tfEmail.setForeground(new java.awt.Color(51, 51, 51));
         tfEmail.setBorder(null);
         tfEmail.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        tfEmail.setNextFocusableComponent(tfMatKhau);
+        tfEmail.setNextFocusableComponent(lbNgaySinh);
         tfEmail.setOpaque(false);
         getContentPane().add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, 290, 35));
         getContentPane().add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 290, -1));
@@ -182,7 +195,7 @@ public class DangKyForm extends javax.swing.JFrame {
         getContentPane().add(lbNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 190, 30));
 
         tfTaiKhoan.setBackground(new java.awt.Color(51, 51, 51));
-        tfTaiKhoan.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        tfTaiKhoan.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
         tfTaiKhoan.setForeground(new java.awt.Color(51, 51, 51));
         tfTaiKhoan.setBorder(null);
         tfTaiKhoan.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -208,9 +221,14 @@ public class DangKyForm extends javax.swing.JFrame {
         lbXacNhanMatKhau.setText("Xác Nhận Mật Khẩu");
         getContentPane().add(lbXacNhanMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 370, 190, 30));
 
+        lbThongBao.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
+        lbThongBao.setForeground(new java.awt.Color(255, 0, 0));
+        getContentPane().add(lbThongBao, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 430, 360, 40));
+
         tfMatKhau.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tfMatKhau.setText("password");
         tfMatKhau.setBorder(null);
+        tfMatKhau.setNextFocusableComponent(tfXNMatKhau);
         tfMatKhau.setOpaque(false);
         tfMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +240,7 @@ public class DangKyForm extends javax.swing.JFrame {
         tfXNMatKhau.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         tfXNMatKhau.setText("password");
         tfXNMatKhau.setBorder(null);
+        tfXNMatKhau.setNextFocusableComponent(lbXacNhanMatKhau);
         tfXNMatKhau.setOpaque(false);
         tfXNMatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,37 +249,29 @@ public class DangKyForm extends javax.swing.JFrame {
         });
         getContentPane().add(tfXNMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 290, 35));
 
-        lbThongBao.setFont(new java.awt.Font("Dialog", 1, 13)); // NOI18N
-        lbThongBao.setForeground(new java.awt.Color(255, 0, 0));
-        getContentPane().add(lbThongBao, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, 290, 30));
-
         tfNgaySinh.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         tfNgaySinh.setDoubleBuffered(true);
-        tfNgaySinh.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        tfNgaySinh.setMaximumSize(new java.awt.Dimension(145, 35));
-        tfNgaySinh.setMinimumSize(new java.awt.Dimension(145, 35));
-        tfNgaySinh.setPreferredSize(new java.awt.Dimension(145, 35));
-        tfNgaySinh.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfNgaySinhActionPerformed(evt);
-            }
-        });
+        tfNgaySinh.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        tfNgaySinh.setMaximumSize(new java.awt.Dimension(190, 40));
+        tfNgaySinh.setMinimumSize(new java.awt.Dimension(190, 40));
+        tfNgaySinh.setNextFocusableComponent(tfTaiKhoan);
+        tfNgaySinh.setPreferredSize(new java.awt.Dimension(190, 40));
         getContentPane().add(tfNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 190, 40));
 
-        btnMinimize2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnMinimize2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png"))); // NOI18N
-        btnMinimize2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png"))); // NOI18N
+        btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMinimize2MouseClicked(evt);
+                btnMinimizeMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnMinimize2MouseEntered(evt);
+                btnMinimizeMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnMinimize2MouseExited(evt);
+                btnMinimizeMouseExited(evt);
             }
         });
-        getContentPane().add(btnMinimize2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, 40));
+        getContentPane().add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, 40));
 
         lbBackground.setBackground(new java.awt.Color(255, 255, 255));
         lbBackground.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -272,6 +283,7 @@ public class DangKyForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
     //check rỗng ở các textfield
     public boolean checkRong() {
         if (tfTenNguoiDung.getText().equals("")) {
@@ -280,7 +292,7 @@ public class DangKyForm extends javax.swing.JFrame {
         } else if (tfEmail.getText().equals("")) {
             lbThongBao.setText("Bạn Cần Nhập Email");
             return false;
-        } else if ( tfNgaySinh.getDate() == null) {
+        } else if (tfNgaySinh.getDate() == null) {
             lbThongBao.setText("Bạn Cần Chọn Ngày Sinh");
             return false;
         } else if (tfTaiKhoan.getText().equals("")) {
@@ -289,10 +301,10 @@ public class DangKyForm extends javax.swing.JFrame {
         } else if (tfMatKhau.getText().equals("")) {
             lbThongBao.setText("Bạn Cần Nhập Mật Khẩu");
             return false;
-        } else if (tfXNMatKhau.getText().equals("")){
+        } else if (tfXNMatKhau.getText().equals("")) {
             lbThongBao.setText("Bạn Cần Xác Nhận Lại Mật Khẩu");
             return false;
-        }else if(!tfMatKhau.getText().equals(tfXNMatKhau.getText())){
+        } else if (!tfMatKhau.getText().equals(tfXNMatKhau.getText())) {
             lbThongBao.setText("Mật Khẩu Xác Nhận Không Khớp");
             return false;
         }
@@ -368,7 +380,35 @@ public class DangKyForm extends javax.swing.JFrame {
     private void lbDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangNhapMouseClicked
         if (checkRong()) {
             Client client = new Client();
-            
+            TaiKhoan taiKhoan = new TaiKhoan(tfTaiKhoan.getText(), tfMatKhau.getText());
+            ThongTin thongTin = new ThongTin(tfTenNguoiDung.getText(), tfEmail.getText(), new java.sql.Date(tfNgaySinh.getDate().getTime()));
+            String[] messReponse = client.guiNguoiDungMoi(taiKhoan, thongTin);
+            String thongBao = "";
+            for (String s : messReponse) {
+                switch (s) {
+                    case "trung_taikhoan":
+                        thongBao += "Tài Khoản Đã Tồn Tại \n";
+                        break;
+                    case "trung_email":
+                        thongBao += "Email Đã Có Người Sử Dụng \n";
+                        break;
+                    case "fail":
+                        thongBao += "Đăng Ký Không Thành Công Mời Bạn Thử Lại \n";
+                        break;
+                    default:
+                        break;
+                    case "success":
+                        JOptionPane.showMessageDialog(null, "Đăng Ký Thành Công", "Đăng Ký", JOptionPane.INFORMATION_MESSAGE);
+                        java.awt.EventQueue.invokeLater(new Runnable() {
+                            public void run() {
+                                new DangNhapForm().setVisible(true);
+                            }
+                        });
+                        this.dispose();
+                        this.disable();
+                }
+            }
+            lbThongBao.setText(thongBao);
         }
     }//GEN-LAST:event_lbDangNhapMouseClicked
 
@@ -406,30 +446,26 @@ public class DangKyForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfMatKhauActionPerformed
 
-    private void tfNgaySinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNgaySinhActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfNgaySinhActionPerformed
-
     private void tfXNMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfXNMatKhauActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfXNMatKhauActionPerformed
 
-    private void btnMinimize2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimize2MouseClicked
+    private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
         // TODO add your handling code here:
         this.setState(this.ICONIFIED);
-    }//GEN-LAST:event_btnMinimize2MouseClicked
+    }//GEN-LAST:event_btnMinimizeMouseClicked
 
-    private void btnMinimize2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimize2MouseEntered
+    private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
         // TODO add your handling code here:
-        btnBack.setOpaque(true);
-        btnBack.setBackground(new Color(213, 208, 208));
-    }//GEN-LAST:event_btnMinimize2MouseEntered
+        btnMinimize.setOpaque(true);
+        btnMinimize.setBackground(new Color(213, 208, 208));
+    }//GEN-LAST:event_btnMinimizeMouseEntered
 
-    private void btnMinimize2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimize2MouseExited
+    private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
         // TODO add your handling code here:
-        btnBack.setOpaque(false);
-        btnBack.setBackground(new Color(255, 255, 255));
-    }//GEN-LAST:event_btnMinimize2MouseExited
+        btnMinimize.setOpaque(false);
+        btnMinimize.setBackground(new Color(255, 255, 255));
+    }//GEN-LAST:event_btnMinimizeMouseExited
 
     /**
      * @param args the command line arguments
@@ -471,7 +507,7 @@ public class DangKyForm extends javax.swing.JFrame {
     private javax.swing.JLabel btnBack;
     private javax.swing.JLabel btnClose;
     private keeptoo.KGradientPanel btnDangNhap;
-    private javax.swing.JLabel btnMinimize2;
+    private javax.swing.JLabel btnMinimize;
     private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator12;

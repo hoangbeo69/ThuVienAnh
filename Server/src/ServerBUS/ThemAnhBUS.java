@@ -5,6 +5,7 @@
  */
 package ServerBUS;
 
+import ServerClass.HinhAnh;
 import ServerDB.ServerDB;
 import java.io.BufferedOutputStream;
 import java.io.DataInputStream;
@@ -41,9 +42,9 @@ public class ThemAnhBUS {
             byte[] dataRead = new byte[ha.getDungluong()];
             inputStream.readNBytes(dataRead, 0, dataRead.length);
             String pathFile = null;
-            if ( (pathFile = saveFile(dataRead, ha.getName())) != null) {
-                
-                if (themAnhDB(pathFile,dataArray[0], ha)) {
+            if ((pathFile = saveFile(dataRead, ha.getName())) != null) {
+
+                if (themAnhDB(pathFile, dataArray[0], ha)) {
                     sendResult("success");
                 } else {
                     sendResult("fail");
@@ -80,9 +81,9 @@ public class ThemAnhBUS {
         return null;
     }
 
-    public boolean themAnhDB(String pathFile,String id, HinhAnh ha) {
+    public boolean themAnhDB(String pathFile, String id, HinhAnh ha) {
         ServerDB serverDB = new ServerDB();
-        if (serverDB.updateThemAnh(pathFile,id, ha)) {
+        if (serverDB.updateThemAnh(pathFile, id,ha)) {
             return true;
         } else {
             return false;

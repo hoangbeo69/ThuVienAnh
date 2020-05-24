@@ -16,13 +16,13 @@ import java.util.logging.Logger;
  *
  * @author HiHi
  */
-public class DangNhapConnection {
+public class DangNhapData {
 
     private String taiKhoan;
     private String matKhau;
     private Socket socket;
 
-    public DangNhapConnection(Socket socket, String taiKhoan, String matKhau) {
+    public DangNhapData(Socket socket, String taiKhoan, String matKhau) {
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
         this.socket = socket;
@@ -46,7 +46,7 @@ public class DangNhapConnection {
             output.flush();
             return true;
         } catch (IOException ex) {
-            Logger.getLogger(DangNhapConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DangNhapData.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
 
@@ -62,7 +62,7 @@ public class DangNhapConnection {
             input.read(dataRead, 0, dataRead.length);
             id =  new String(dataRead).trim();
         } catch (IOException ex) {
-            Logger.getLogger(DangNhapConnection.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DangNhapData.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
     }

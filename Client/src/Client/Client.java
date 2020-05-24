@@ -6,11 +6,14 @@
 package GiaoDien;
 
 import BackEndClass.HinhAnh;
+import BackEndClass.TaiKhoan;
+import BackEndClass.ThongTin;
+import BackEndData.DangKyData;
 import BackEndData.GuiHinhAnhData;
 import BackEndData.HinhAnhData;
 import BackEndData.ListHinhAnhData;
 import BackEndData.XoaAnhData;
-import BackEndData.DangNhapConnection;
+import BackEndData.DangNhapData;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -48,11 +51,12 @@ public class Client {
             return false;
         }
     }
+
     //hàm gửi tài khoản mật khẩu về server
     public String dangNhap(String taiKhoan, String matKhau) {
         if (sendMessToServer("dang_nhap")) {
             String id = null;
-            if ((id = new DangNhapConnection(socket, taiKhoan, matKhau).checkDangNhap()) != null) {
+            if ((id = new DangNhapData(socket, taiKhoan, matKhau).checkDangNhap()) != null) {
                 this.userID = id;
                 return id;
             }
@@ -60,6 +64,7 @@ public class Client {
         }
         return null;
     }
+
     //hàm lấy danh sách ảnh từ server
     public ArrayList<HinhAnh> getDanhSachAnh() {
         ArrayList<HinhAnh> dsha = null;
@@ -72,9 +77,10 @@ public class Client {
         }
         return dsha;
     }
+
     // hàm lấy ảnh từ server
-    synchronized public byte [] getHinhAnh(String idAnh) {
-        byte [] data = null;
+    synchronized public byte[] getHinhAnh(String idAnh) {
+        byte[] data = null;
         if (sendMessToServer("gui_anh")) {
             HinhAnhData had = new HinhAnhData(userID, idAnh, socket);
             if (had.guiData()) {
@@ -83,32 +89,45 @@ public class Client {
         }
         return data;
     }
+
     // hàm thêm ảnh và gửi ảnh đó đến server
     boolean guiAnhMoi(HinhAnh ha) {
         if (sendMessToServer("them_anh")) {
             GuiHinhAnhData ghad = new GuiHinhAnhData(userID, ha, socket);
             if (ghad.guiData()) {
-                if(ghad.layData()){
-                    return  true;
-                }else{
+                if (ghad.layData()) {
+                    return true;
+                } else {
                     return false;
                 }
             }
         }
         return false;
     }
+
     // hàm xóa ảnh 
-    public  boolean xoaHinhAnh(String idAnh) {
-        if(sendMessToServer("xoa_anh")){
-            XoaAnhData xadt = new XoaAnhData(userID,idAnh,socket);
-                if(xadt.guiData()){
-                    if(xadt.layData()){
-                        return true;
-                    }else{
-                        return false;
-                    }
+    public boolean xoaHinhAnh(String idAnh) {
+        if (sendMessToServer("xoa_anh")) {
+            XoaAnhData xadt = new XoaAnhData(userID, idAnh, socket);
+            if (xadt.guiData()) {
+                if (xadt.layData()) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
         return false;
+    }
+
+    public String[] guiNguoiDungMoi(TaiKhoan taiKhoan, ThongTin thongTin) {
+        String[] result = null;
+        if(sendMessToServer("dang_ky")){
+            DangKyData dkdt = new DangKyData(taiKhoan,thongTin,socket);
+            if(dkdt.guiData()){
+                result = dkdt.layData();
+            }
+        }
+        return  result;
     }
 }

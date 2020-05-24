@@ -5,6 +5,7 @@
  */
 package ServerBUS;
 
+import ServerClass.HinhAnh;
 import ServerDB.ServerDB;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;

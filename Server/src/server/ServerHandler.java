@@ -5,6 +5,7 @@
  */
 package server;
 
+import ServerBUS.DangKyBUS;
 import ServerBUS.DangNhapBUS;
 import ServerBUS.HinhAnhBUS;
 import ServerBUS.ListAnhBUS;
@@ -51,6 +52,9 @@ public class ServerHandler {
             case "doi_thong_tin":
                 doiThongTin();
                 break;
+            case "dang_ky":
+                dangKy();
+                break;
             case "xoa_anh":
                 xoaAnh();
                 break;
@@ -85,11 +89,18 @@ public class ServerHandler {
         ThemAnhBUS themanh = new ThemAnhBUS(this.socket);
         themanh.layDuLieuCliet();
     }
-    public void xoaAnh(){
+
+    public void xoaAnh() {
         XoaAnhBUS xoaanh = new XoaAnhBUS(this.socket);
-        if(xoaanh.layDuLieuClient()){
+        if (xoaanh.layDuLieuClient()) {
             xoaanh.traDuLieuClient();
         }
-        
+
+    }
+    public void dangKy(){
+        DangKyBUS dangky = new DangKyBUS(this.socket);
+        if(dangky.layDuLieuClient()){
+            dangky.traDuLieuClient();
+        }
     }
 }

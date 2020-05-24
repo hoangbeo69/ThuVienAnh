@@ -5,10 +5,13 @@
  */
 package ServerDB;
 
-import ServerBUS.HinhAnh;
+import ServerClass.HinhAnh;
+import ServerClass.TaiKhoan;
+import ServerClass.ThongTin;
 import ServerDB.ConnectionDB;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -64,42 +67,102 @@ public class ServerDB {
     public String getFilePathHinhAnh(String userID, String anhID) {
         connection = new ConnectionDB();
         String pathImage = null;
-        try{
-            String qry = "SELECT ha_filepath FROM hinh_anh WHERE user_id='"+userID+"' and ha_id = '"+anhID+"'";
+        try {
+            String qry = "SELECT ha_filepath FROM hinh_anh WHERE user_id='" + userID + "' and ha_id = '" + anhID + "'";
             ResultSet rs = connection.sqlQuery(qry);
-            if(rs!= null){
-                while(rs.next()){
+            if (rs != null) {
+                while (rs.next()) {
                     pathImage = rs.getString("ha_filepath");
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Nhận file không thành công");
-        }finally{
+        } finally {
             connection.closeConnect();
         }
         return pathImage;
     }
 
 //(`ha_id`, `ha_name`, `ha_filepath`, `ha_dungluong`, `user_id`, `ha_date`) VALUES ('', '', '', '', '', '')
-
-    public Boolean updateThemAnh(String pathfile,String id, HinhAnh ha) {
+    public Boolean updateThemAnh(String pathfile, String id, HinhAnh ha) {
         connection = new ConnectionDB();
-        
-        Boolean success = connection.sqlUpdate("INSERT INTO hinh_anh (ha_id,ha_name,ha_filepath,ha_dungluong,user_id,ha_date) VALUES ('" 
-                +ha.getId()+"','"
-                +ha.getName()+"','"
-                +pathfile+"',"
-                +ha.getDungluong()+",'"
-                +id+"','"
-                +ha.getDate()+"');");
-        connection.checkConnect();
+
+        Boolean success = connection.sqlUpdate("INSERT INTO hinh_anh (ha_id,ha_name,ha_filepath,ha_dungluong,user_id,ha_date) VALUES ('"
+                + ha.getId() + "','"
+                + ha.getName() + "','"
+                + pathfile + "',"
+                + ha.getDungluong() + ",'"
+                + id + "','"
+                + ha.getDate() + "');");
+        connection.closeConnect();
         return success;
     }
 
     public boolean xoaAnh(String id, String idAnh) {
         connection = new ConnectionDB();
-        boolean success  = connection.sqlUpdate("DELETE FROM hinh_anh WHERE ha_id = '"+idAnh+"' AND user_id='"+id+"';");
+        boolean success = connection.sqlUpdate("DELETE FROM hinh_anh WHERE ha_id = '" + idAnh + "' AND user_id='" + id + "';");
         connection.closeConnect();
         return success;
     }
+
+    public boolean checkTaiKhoan(String taiKhoan) {
+        connection = new ConnectionDB();
+//        String id = null;
+        try {
+            String qry = "SELECT user_id as id FROM tai_khoan WHERE tk_username ='" + taiKhoan + "'";
+            ResultSet rs = connection.sqlQuery(qry);
+            if (rs != null) {
+                rs.next();
+//                id = rs.getString("id");
+                rs.getString("id");
+            }
+        } catch (Exception e) {
+            return true;
+        } finally {
+            connection.closeConnect();
+        }
+
+        return false;
+    }
+
+    public boolean checkEmail(String email) {
+        connection = new ConnectionDB();
+        try {
+            String qry = "SELECT user_id as id FROM user WHERE user_email ='" + email.toLowerCase() + "'";
+            ResultSet rs = connection.sqlQuery(qry);
+            if (rs != null) {
+                rs.next();
+                rs.getString("id");
+            }
+        } catch (Exception e) {
+            return true;
+        } finally {
+            connection.closeConnect();
+        }
+        return false;
+    }
+
+    public boolean themNguoiDung(ThongTin thongTin) {
+        connection = new ConnectionDB();
+
+        Boolean success = connection.sqlUpdate("INSERT INTO `user` (`user_id`, `user_name`, `user_birth`, `user_email`, `user_dungluong`) VALUES ('"
+                + thongTin.getIdUser() + "','"
+                + thongTin.getTenUser() + "','"
+                + thongTin.getBirth() + "','"
+                + thongTin.getEmail() + "',"
+                + 104857600 + ");");
+        connection.closeConnect();
+        return success;
+    }
+
+    public boolean themTaiKhoan(TaiKhoan taiKhoan) {
+        connection = new ConnectionDB();
+        Boolean success = connection.sqlUpdate("INSERT INTO `tai_khoan` (`user_id`, `tk_username`, `tk_password`) VALUES ('"
+                + taiKhoan.getIdUser() + "','"
+                + taiKhoan.getTaiKhoan() + "','"
+                + taiKhoan.getMatKhau() + "');");
+        connection.closeConnect();
+        return success;
+    }
+
 }
