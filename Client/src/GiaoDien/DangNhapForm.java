@@ -11,12 +11,12 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import org.w3c.dom.css.RGBColor;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseListener;
+//import javax.swing.JLabel;
+//import javax.swing.JOptionPane;
+//import javax.swing.JPanel;
+//import org.w3c.dom.css.RGBColor;
 
 /**
  *
