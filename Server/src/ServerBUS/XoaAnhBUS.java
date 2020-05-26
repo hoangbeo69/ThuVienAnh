@@ -45,7 +45,7 @@ public class XoaAnhBUS {
     public void traDuLieuClient() {
         ServerDB serverDB = new ServerDB();
         String filePath = serverDB.getFilePathHinhAnh(this.id, this.idAnh);
-        if (filePath != null && deleteAnhFile(idAnh)) {
+        if (filePath != null && deleteAnhFile(filePath)) {
             DataOutputStream output = null;
             try {
                 output = new DataOutputStream(socket.getOutputStream());
@@ -67,8 +67,8 @@ public class XoaAnhBUS {
 
     public boolean deleteAnhFile(String path) {
         try {
-            File file = new File(System.getProperty("user.dir") + "/DataImgage/" + path);
-            file.deleteOnExit();
+            File file = new File(System.getProperty("user.dir") + "/src/DataImage/" + path);
+            file.delete();
         } catch (Exception e) {
             return false;
         }

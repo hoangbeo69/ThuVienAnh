@@ -88,6 +88,7 @@ public class MainControl extends javax.swing.JFrame {
 
     //show list những ảnh tại page 1
     public void DisplayFirstPageImage() {
+        currentPage =1;
         if (NEWEST) {
             sortFirstList();
         } else {

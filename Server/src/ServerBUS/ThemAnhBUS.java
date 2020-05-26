@@ -62,7 +62,7 @@ public class ThemAnhBUS {
         BufferedOutputStream output = null;
         try {
             Random r = new Random();
-            int random = r.nextInt(1000);
+            int random = r.nextInt(99999);
             File file = new File(System.getProperty("user.dir") + "/src/DataImage/" + random + nameFile);
             output = new BufferedOutputStream(new FileOutputStream(file));
             output.write(dataRead, 0, dataRead.length);

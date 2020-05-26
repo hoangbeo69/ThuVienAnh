@@ -80,7 +80,6 @@ public class HinhAnhBUS {
             input.close();
             return data;
         } catch (IOException ex) {
-            Logger.getLogger(HinhAnhBUS.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
