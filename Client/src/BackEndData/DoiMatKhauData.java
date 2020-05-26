@@ -22,18 +22,19 @@ public class DoiMatKhauData {
     TaiKhoan taiKhoan;
     Socket socket;
     String matKhauMoi;
-
-    public DoiMatKhauData(TaiKhoan taiKhoan, String matKhauMoi, Socket socket) {
+    String userId;
+    public DoiMatKhauData(String userId,TaiKhoan taiKhoan, String matKhauMoi, Socket socket) {
         this.taiKhoan = taiKhoan;
         this.socket = socket;
         this.matKhauMoi = matKhauMoi;
+        this.userId = userId;
     }
 
     public boolean guiData() {
         DataOutputStream output = null;
         try {
             output = new DataOutputStream(socket.getOutputStream());
-            output.writeUTF(taiKhoan.toString() + "$" + matKhauMoi);
+            output.writeUTF(userId+"$"+taiKhoan.toString() + "$" + matKhauMoi);
             output.flush();
         } catch (IOException ex) {
             Logger.getLogger(DoiMatKhauData.class.getName()).log(Level.SEVERE, null, ex);

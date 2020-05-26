@@ -140,7 +140,7 @@ public class Client {
     public String doiMatKhau(TaiKhoan taiKhoan, String matKhauMoi) {
         String result = null;
         if (sendMessToServer("doi_mat_khau")) {
-            DoiMatKhauData dmkdt = new DoiMatKhauData(taiKhoan, matKhauMoi, socket);
+            DoiMatKhauData dmkdt = new DoiMatKhauData(this.userID,taiKhoan, matKhauMoi, socket);
             if (dmkdt.guiData()) {
                 result = dmkdt.layData();
             }
@@ -151,7 +151,7 @@ public class Client {
     public String doiThongTin(ThongTin thongTin) {
         String result = null;
         if (sendMessToServer("doi_thong_tin")) {
-            DoiThongTinData dttdt = new DoiThongTinData(thongTin,socket);
+            DoiThongTinData dttdt = new DoiThongTinData(this.userID,thongTin,socket);
             if (dttdt.guiData()) {
                 result = dttdt.layData();
             }

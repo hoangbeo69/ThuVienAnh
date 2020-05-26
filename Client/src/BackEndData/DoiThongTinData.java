@@ -21,17 +21,18 @@ public class DoiThongTinData {
 
     ThongTin thongTin;
     Socket socket;
-
-    public DoiThongTinData(ThongTin thongTin, Socket socket) {
+    String userId;
+    public DoiThongTinData(String userId,ThongTin thongTin, Socket socket) {
         this.socket = socket ;
         this.thongTin  = thongTin;
+        this.userId = userId ;
     }
 
     public boolean guiData() {
         DataOutputStream output = null;
         try {
             output = new DataOutputStream(socket.getOutputStream());
-            output.writeUTF(thongTin.toString());
+            output.writeUTF(userId+"$"+thongTin.toString());
             output.flush();
         } catch (IOException ex) {
             Logger.getLogger(DoiThongTinData.class.getName()).log(Level.SEVERE, null, ex);

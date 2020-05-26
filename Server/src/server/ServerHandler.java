@@ -7,17 +7,14 @@ package server;
 
 import ServerBUS.DangKyBUS;
 import ServerBUS.DangNhapBUS;
+import ServerBUS.DoiMatKhauBUS;
+import ServerBUS.DoiThongTinBUS;
 import ServerBUS.HinhAnhBUS;
 import ServerBUS.ListAnhBUS;
 import ServerBUS.ThemAnhBUS;
 import ServerBUS.XoaAnhBUS;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -97,10 +94,25 @@ public class ServerHandler {
         }
 
     }
-    public void dangKy(){
+
+    public void dangKy() {
         DangKyBUS dangky = new DangKyBUS(this.socket);
-        if(dangky.layDuLieuClient()){
+        if (dangky.layDuLieuClient()) {
             dangky.traDuLieuClient();
+        }
+    }
+
+    public void doiThongTin() {
+        DoiThongTinBUS doiThongTin = new DoiThongTinBUS(this.socket);
+        if (doiThongTin.layDuLieuClient()) {
+            doiThongTin.traDuLieuClient();
+        }
+    }
+
+    public void doiMatKhau() {
+        DoiMatKhauBUS doiMatKhau = new DoiMatKhauBUS(this.socket);
+        if (doiMatKhau.layDuLieuClient()) {
+            doiMatKhau.traDuLieuClient();
         }
     }
 }
