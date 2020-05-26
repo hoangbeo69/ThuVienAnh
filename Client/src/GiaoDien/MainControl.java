@@ -73,7 +73,7 @@ public class MainControl extends javax.swing.JFrame {
         if (danhSachAnh.size() != 0) {
             setDungLuong();
             sortFirstList();
-            newDisplayImage(0, 7);
+            DisplayFirstPageImage();
         }
     }
 
@@ -108,15 +108,14 @@ public class MainControl extends javax.swing.JFrame {
         lbPageCount.validate();
     }
 
-    //lấy danh danh sách các hình ảnh được hiển thị trong list từ first đên last    
-    public void newDisplayImage(int first, int last) {
+    //lấy danh danh sách các hình ảnh được hiển thị trong list từ vị trí start đên end    
+    public void newDisplayImage(int start, int end) {
 
         //xóa tất cả phân tử có trong panelHinhanh và vẽ lại từ đầu
         panelHinhAnh.removeAll();
         panelHinhAnh.repaint();
         panelHinhAnh.validate();
-
-        for (int i = first; i <= last; i++) {
+        for (int i = start; i <= end; i++) {
             HinhAnh ha = (HinhAnh) danhSachAnh.get(i);
             addNewPanelAnh(ha);
         }

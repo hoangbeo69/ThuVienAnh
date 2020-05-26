@@ -4,23 +4,34 @@
  * and open the template in the editor.
  */
 package ServerClass;
+
 import java.sql.Date;
 import java.util.Random;
+
 /**
  *
  * @author HiHi
  */
 public class ThongTin {
+
     private String tenUser;
     private String email;
     private Date birth;
     private String idUser;
+
     public ThongTin(String tenUser, String email, Date birth) {
         this.tenUser = tenUser;
         this.email = email;
         this.birth = birth;
         Random r = new Random();
-        this.idUser= "USER"+r.nextInt(9999);
+        this.idUser = "USER" + r.nextInt(9999);
+    }
+
+    public ThongTin(String idUser ,String tenUser, String email, Date birth) {
+        this.tenUser = tenUser;
+        this.email = email;
+        this.birth = birth;
+        this.idUser = idUser;
     }
 
     public Date getBirth() {
@@ -59,5 +70,5 @@ public class ThongTin {
     public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
-    
+
 }

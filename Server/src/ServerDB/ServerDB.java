@@ -8,10 +8,8 @@ package ServerDB;
 import ServerClass.HinhAnh;
 import ServerClass.TaiKhoan;
 import ServerClass.ThongTin;
-import ServerDB.ConnectionDB;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  *
@@ -165,4 +163,23 @@ public class ServerDB {
         return success;
     }
 
+    public boolean updateThongTin(ThongTin thongTin) {
+        connection = new ConnectionDB();
+        Boolean success = connection.sqlUpdate("UPDATE user set "
+                + " user_name = '" + thongTin.getTenUser()
+                + "', user_birth = " + thongTin.getBirth().toString()
+                + ", user_email = '" + thongTin.getEmail()
+                + "' WHERE user_id = '" + thongTin.getIdUser() + "';");
+        connection.closeConnect();
+        return success;
+    }
+
+    public boolean updateMatKhau(String idUser, String matKhauMoi) {
+        connection = new ConnectionDB();
+        Boolean success = connection.sqlUpdate("UPDATE tai_khoan set "
+                + "tk_password = '" + matKhauMoi
+                + "' WHERE user_id = '" + idUser + "';");
+        connection.closeConnect();
+        return success;
+    }
 }
