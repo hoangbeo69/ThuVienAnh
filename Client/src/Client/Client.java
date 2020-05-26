@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GiaoDien;
+package Client;
 
+import BackEndData.DoiThongTinData;
+import BackEndData.DoiMatKhauData;
 import BackEndClass.HinhAnh;
 import BackEndClass.TaiKhoan;
 import BackEndClass.ThongTin;
@@ -27,15 +29,18 @@ import java.util.logging.Logger;
  */
 public class Client {
 
-    Socket socket;
-    String userID;
+    private Socket socket;
+    private String userID;
     DataOutputStream outputStream;
+    public boolean serverAlive;
 
     public Client() {
         try {
             this.socket = new Socket("localhost", 5555);
+            this.serverAlive = true;
         } catch (IOException ex) {
-            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+            this.serverAlive = false;
+            System.out.println("Không Tìm Thấy Server");
         }
     }
 
@@ -91,7 +96,7 @@ public class Client {
     }
 
     // hàm thêm ảnh và gửi ảnh đó đến server
-    boolean guiAnhMoi(HinhAnh ha) {
+    public boolean guiAnhMoi(HinhAnh ha) {
         if (sendMessToServer("them_anh")) {
             GuiHinhAnhData ghad = new GuiHinhAnhData(userID, ha, socket);
             if (ghad.guiData()) {
@@ -120,14 +125,38 @@ public class Client {
         return false;
     }
 
+    // hàm đăng ký tài khoản
     public String[] guiNguoiDungMoi(TaiKhoan taiKhoan, ThongTin thongTin) {
         String[] result = null;
-        if(sendMessToServer("dang_ky")){
-            DangKyData dkdt = new DangKyData(taiKhoan,thongTin,socket);
-            if(dkdt.guiData()){
+        if (sendMessToServer("dang_ky")) {
+            DangKyData dkdt = new DangKyData(taiKhoan, thongTin, socket);
+            if (dkdt.guiData()) {
                 result = dkdt.layData();
             }
         }
-        return  result;
+        return result;
     }
+
+    public String doiMatKhau(TaiKhoan taiKhoan, String matKhauMoi) {
+        String result = null;
+        if (sendMessToServer("doi_mat_khau")) {
+            DoiMatKhauData dmkdt = new DoiMatKhauData(taiKhoan, matKhauMoi, socket);
+            if (dmkdt.guiData()) {
+                result = dmkdt.layData();
+            }
+        }
+        return result;
+    }
+
+    public String doiThongTin(ThongTin thongTin) {
+        String result = null;
+        if (sendMessToServer("doi_thong_tin")) {
+            DoiThongTinData dttdt = new DoiThongTinData(thongTin,socket);
+            if (dttdt.guiData()) {
+                result = dttdt.layData();
+            }
+        }
+        return result;
+    }
+
 }

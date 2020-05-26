@@ -5,12 +5,13 @@
  */
 package GiaoDien;
 
-import GiaoDien.Client;
+import Client.Client;
 import GiaoDien.MainControl;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 //import java.awt.event.MouseEvent;
 //import java.awt.event.MouseListener;
 //import javax.swing.JLabel;
@@ -27,6 +28,8 @@ public class DangNhapForm extends javax.swing.JFrame {
     /**
      * Creates new form DangNhapForm
      */
+    final Client client;
+
     public DangNhapForm() {
         this.setUndecorated(true);
         initComponents();
@@ -34,7 +37,7 @@ public class DangNhapForm extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setBackground(new Color(0, 0, 0, 0));
-
+        this.client = new Client();
     }
 
     /**
@@ -162,14 +165,6 @@ public class DangNhapForm extends javax.swing.JFrame {
         btnDangNhap.setkStartColor(new java.awt.Color(102, 102, 102));
         btnDangNhap.setkTransparentControls(false);
         btnDangNhap.setOpaque(false);
-        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseExited(evt);
-            }
-        });
         btnDangNhap.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbDangNhap.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -201,19 +196,13 @@ public class DangNhapForm extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+// <editor-fold defaultstate="collapsed" desc="Button Tắt Cửa Sổ"> 
     //sự kiện click vào thì thoát chương trình
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         // TODO add your handling code here:
         this.dispose();
         this.disable();
     }//GEN-LAST:event_btnCloseMouseClicked
-
-    //sự kiện click vào thì màn hình đăng nhập minimize
-    private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
-        // TODO add your handling code here:
-        this.setState(this.ICONIFIED);
-    }//GEN-LAST:event_btnMinimizeMouseClicked
 
     //sự kiện đưa chuột vào btnClose
     private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
@@ -229,19 +218,9 @@ public class DangNhapForm extends javax.swing.JFrame {
         btnClose.setOpaque(false);
         btnClose.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnCloseMouseExited
+    // </editor-fold> //done
+// <editor-fold defaultstate="collapsed" desc="Label Đăng Ký Tài Khoản"> 
 
-    //sự kiện đưa chuột vào btnMinimize
-    private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
-        // TODO add your handling code here:
-        btnMinimize.setOpaque(true);
-        btnMinimize.setBackground(new Color(213, 208, 208));
-    }//GEN-LAST:event_btnMinimizeMouseEntered
-    //sự kiện đưa chuột vào btnMinimize
-    private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
-        // TODO add your handling code here:
-        btnMinimize.setOpaque(false);
-        btnMinimize.setBackground(new Color(255, 255, 255));
-    }//GEN-LAST:event_btnMinimizeMouseExited
     //sự kiên đưa chuột vào lb đăng ký tài khoản
     private void lbDangKyTaiKhoanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangKyTaiKhoanMouseEntered
         // TODO add your handling code here:
@@ -255,66 +234,53 @@ public class DangNhapForm extends javax.swing.JFrame {
     //sự kiện khi click chuột đăng kí tài khoản
     private void lbDangKyTaiKhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangKyTaiKhoanMouseClicked
         // TODO add your handling code here:
-                java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new DangKyForm().setVisible(true);
             }
         });
         this.dispose();
         this.disable();
-
     }//GEN-LAST:event_lbDangKyTaiKhoanMouseClicked
-    //sự kiện đưa chuột vào btn đăng nhập
-    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
-        // TODO add your handling code here:
-        lbDangNhap.setForeground(new Color(102, 102, 102));
-        btnDangNhap.setkEndColor(new Color(102, 102, 102));
-        btnDangNhap.setkStartColor(new Color(255, 255, 255));
-        btnDangNhap.setkFillBackground(true);
 
-    }//GEN-LAST:event_btnDangNhapMouseEntered
-    //sự kiện đưa chuột ra khỏi btn đăng nhập
-    private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited
-        // TODO add your handling code here:
-        lbDangNhap.setForeground(new Color(51, 51, 51));
-        btnDangNhap.setkEndColor(new Color(255, 255, 255));
-        btnDangNhap.setkStartColor(new Color(102, 102, 102));
-        btnDangNhap.setkFillBackground(false);
-
-    }//GEN-LAST:event_btnDangNhapMouseExited
-    //sự kiện khi click chuột đăng nhập
+// </editor-fold> //done 
+// <editor-fold defaultstate="collapsed" desc="Button Đăng Nhập"> 
+//sự kiện khi click chuột đăng nhập
     private void lbDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangNhapMouseClicked
         // TODO add your handling code here:
         final String taiKhoan = tfTaiKhoan.getText();
         final String matKhau = tfMatKhau.getText();
-        if (taiKhoan.equals("") || matKhau.equals("")) {
-            lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không được để trống");
-            this.validate();
-        } else {
-            final Client client = new Client();
-            this.setCursor(Cursor.WAIT_CURSOR);
-            String id = null;
-            if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {
-                this.setCursor(Cursor.DEFAULT_CURSOR);
-                lbThongBaoDangNhap.setText("");
-                final String idTaiKhoan = id;
-                java.awt.EventQueue.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        MainControl main = new MainControl(client, taiKhoan, idTaiKhoan);
-                        main.enable(true);
-                        main.setVisible(true);
-                    }
-                });
-
-                this.dispose();
-                this.setVisible(false);
-            } else {
-                this.setCursor(Cursor.DEFAULT_CURSOR);
-                tfMatKhau.setText("");
-                lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không chính xác");
+        if (client.serverAlive) {
+            if (taiKhoan.equals("") || matKhau.equals("")) {
+                lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không được để trống");
                 this.validate();
+            } else {
+                this.setCursor(Cursor.WAIT_CURSOR);
+                String id = null;
+                if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {
+                    this.setCursor(Cursor.DEFAULT_CURSOR);
+                    lbThongBaoDangNhap.setText("");
+                    final String idTaiKhoan = id;
+                    java.awt.EventQueue.invokeLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            MainControl main = new MainControl(client, taiKhoan, idTaiKhoan);
+                            main.enable(true);
+                            main.setVisible(true);
+                        }
+                    });
+
+                    this.dispose();
+                    this.setVisible(false);
+                } else {
+                    this.setCursor(Cursor.DEFAULT_CURSOR);
+                    tfMatKhau.setText("");
+                    lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không chính xác");
+                    this.validate();
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Không Thể Kết Nối Đến Máy Chủ", "Lỗi Kết Nối", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_lbDangNhapMouseClicked
 
@@ -333,6 +299,25 @@ public class DangNhapForm extends javax.swing.JFrame {
         btnDangNhap.setkStartColor(new Color(102, 102, 102));
         btnDangNhap.setkFillBackground(false);
     }//GEN-LAST:event_lbDangNhapMouseExited
+// </editor-fold> //done  
+// <editor-fold defaultstate="collapsed" desc="Button Thu Nhỏ Màn Hình"> 
+    private void btnMinimizeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseExited
+        // TODO add your handling code here:
+        btnMinimize.setOpaque(false);
+        btnMinimize.setBackground(new Color(255, 255, 255));
+    }//GEN-LAST:event_btnMinimizeMouseExited
+
+    private void btnMinimizeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseEntered
+        // TODO add your handling code here:
+        btnMinimize.setOpaque(true);
+        btnMinimize.setBackground(new Color(213, 208, 208));
+    }//GEN-LAST:event_btnMinimizeMouseEntered
+
+    private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
+        // TODO add your handling code here:
+        this.setState(this.ICONIFIED);
+    }//GEN-LAST:event_btnMinimizeMouseClicked
+    // </editor-fold> //done
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:

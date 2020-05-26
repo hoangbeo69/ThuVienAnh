@@ -7,6 +7,7 @@ package GiaoDien;
 
 import java.awt.Color;
 import BackEndClass.HinhAnh;
+import Client.Client;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.File;
@@ -28,7 +29,7 @@ public class MainControl extends javax.swing.JFrame {
      * Creates new form MainControl
      */
     static public Client client;
-    
+    String taiKhoan;
     static private ArrayList<HinhAnh> danhSachAnh;
     private Boolean NEWEST = true;
     private int currentPage = 1;
@@ -37,6 +38,7 @@ public class MainControl extends javax.swing.JFrame {
 //Tạo Giao diện chính của chương trình
     public MainControl(Client client, String taiKhoan, String id) {
         this.client = client;
+        this.taiKhoan = taiKhoan;
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -65,7 +67,7 @@ public class MainControl extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         this.setBackground(new Color(0, 0, 0, 0));
-        
+
         lbTenTaiKhoan.setText(taiKhoan.substring(0, 1).toUpperCase() + taiKhoan.substring(1)); //set tên tài khoản vào lbTenTaiKhoan
         danhSachAnh = client.getDanhSachAnh(); //nhận danh sách ảnh từ server
         if (danhSachAnh.size() != 0) {
@@ -80,7 +82,6 @@ public class MainControl extends javax.swing.JFrame {
         for (HinhAnh ha : danhSachAnh) {
             currentDungLuong += ha.getDungluong();
         }
-        System.out.println(currentDungLuong);
         float percent = (float) currentDungLuong / 104857600;
         lbDungLuong.setText("Dung lượng đã sử dụng " + String.format("%.2f", percent * 100) + "% của 100 MB");
     }
@@ -114,7 +115,7 @@ public class MainControl extends javax.swing.JFrame {
         panelHinhAnh.removeAll();
         panelHinhAnh.repaint();
         panelHinhAnh.validate();
-        
+
         for (int i = first; i <= last; i++) {
             HinhAnh ha = (HinhAnh) danhSachAnh.get(i);
             addNewPanelAnh(ha);
@@ -125,20 +126,20 @@ public class MainControl extends javax.swing.JFrame {
     public void addNewPanelAnh(HinhAnh ha) {
         HinhAnhPanel hap = new HinhAnhPanel(ha.getId(), ha.getName(), ha.getDungluong() + "", ha.getDate().toString());
         panelHinhAnh.add(hap);
-        
+
         new addImageToPanel(hap).start(); // cho chạy 1 luồng để set hình ảnh cho panel
     }
 
     // luồng hàm set ảnh cho panel ảnh
     class addImageToPanel implements Runnable {
-        
+
         HinhAnhPanel hap;
         Thread t1;
-        
+
         public addImageToPanel(HinhAnhPanel hap) {
             this.hap = hap;
         }
-        
+
         @Override
         public void run() {
             byte[] data = client.getHinhAnh(hap.getIdAnh()); //lấy byte data của image
@@ -150,7 +151,7 @@ public class MainControl extends javax.swing.JFrame {
                 System.out.println("Không nhận đc data");
             }
         }
-        
+
         public void start() {
             if (t1 == null) {
                 t1 = new Thread(this);
@@ -164,7 +165,7 @@ public class MainControl extends javax.swing.JFrame {
         if (client.xoaHinhAnh(idAnh)) {
             setDanhSachAnh(client.getDanhSachAnh());
             return true;
-            
+
         } else {
             return false;
         }
@@ -203,7 +204,7 @@ public class MainControl extends javax.swing.JFrame {
         }
         );
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -486,7 +487,7 @@ public class MainControl extends javax.swing.JFrame {
     public ArrayList<HinhAnh> getDanhSachAnh() {
         return danhSachAnh;
     }
-    
+
     static void setDanhSachAnh(ArrayList<HinhAnh> danhSanh) {
         danhSachAnh = danhSanh;
     }
@@ -508,6 +509,7 @@ public class MainControl extends javax.swing.JFrame {
 
     private void btnChinhSuaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChinhSuaMouseClicked
         // TODO add your handling code here:
+        new SuaThongTinForm(taiKhoan,client).setVisible(true);
     }//GEN-LAST:event_btnChinhSuaMouseClicked
     // </editor-fold>  
 // <editor-fold defaultstate="collapsed" desc="Button Logout">   
@@ -625,7 +627,7 @@ public class MainControl extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Lưu Ảnh Mới Không Thành Công", "Lưu Ảnh", JOptionPane.ERROR_MESSAGE);
                 this.setOpacity(1f);
             }
-            
+
         }
     }//GEN-LAST:event_btnThemAnhMouseClicked
     //mở của sổ để chọn file cần lưu
@@ -698,7 +700,7 @@ public class MainControl extends javax.swing.JFrame {
             ++this.currentPage;
             setPageCount(currentPage);
             if (danhSachAnh.size() > (this.currentPage * 8)) {
-                
+
                 newDisplayImage((this.currentPage - 1) * 8, this.currentPage * 8 - 1);
                 panelHinhAnh.validate();
             } else {
@@ -779,7 +781,7 @@ public class MainControl extends javax.swing.JFrame {
             try {
                 Thread.sleep(50);
             } catch (Exception e) {
-                
+
             }
         }
     }//GEN-LAST:event_formWindowOpened

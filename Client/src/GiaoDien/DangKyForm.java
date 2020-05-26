@@ -7,6 +7,7 @@ package GiaoDien;
 
 import BackEndClass.TaiKhoan;
 import BackEndClass.ThongTin;
+import Client.Client;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -39,8 +40,9 @@ public class DangKyForm extends javax.swing.JFrame {
         tfNgaySinh.getEditor().setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
         tfNgaySinh.getEditor().setOpaque(false);
         JButton btn_pick = (JButton) tfNgaySinh.getComponent(1);
+        btn_pick.setOpaque(false);
         btn_pick.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png")));
-        
+
     }
 
     /**
@@ -53,6 +55,7 @@ public class DangKyForm extends javax.swing.JFrame {
     private void initComponents() {
 
         btnBack = new javax.swing.JLabel();
+        btnMinimize = new javax.swing.JLabel();
         btnClose = new javax.swing.JLabel();
         btnDangNhap = new keeptoo.KGradientPanel();
         lbDangNhap = new javax.swing.JLabel();
@@ -63,6 +66,7 @@ public class DangKyForm extends javax.swing.JFrame {
         tfEmail = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
         lbNgaySinh = new javax.swing.JLabel();
+        tfNgaySinh = new org.jdesktop.swingx.JXDatePicker();
         tfTaiKhoan = new javax.swing.JTextField();
         jSeparator10 = new javax.swing.JSeparator();
         lbTaiKhoan = new javax.swing.JLabel();
@@ -73,17 +77,10 @@ public class DangKyForm extends javax.swing.JFrame {
         lbThongBao = new javax.swing.JLabel();
         tfMatKhau = new javax.swing.JPasswordField();
         tfXNMatKhau = new javax.swing.JPasswordField();
-        tfNgaySinh = new org.jdesktop.swingx.JXDatePicker();
-        btnMinimize = new javax.swing.JLabel();
         lbBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnBack.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -100,6 +97,21 @@ public class DangKyForm extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 40, 40));
+
+        btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png"))); // NOI18N
+        btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMinimizeMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMinimizeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinimizeMouseExited(evt);
+            }
+        });
+        getContentPane().add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, 40));
 
         btnClose.setBackground(new java.awt.Color(255, 255, 255));
         btnClose.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,14 +141,6 @@ public class DangKyForm extends javax.swing.JFrame {
         btnDangNhap.setkStartColor(new java.awt.Color(102, 102, 102));
         btnDangNhap.setkTransparentControls(false);
         btnDangNhap.setOpaque(false);
-        btnDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnDangNhapMouseExited(evt);
-            }
-        });
         btnDangNhap.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbDangNhap.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
@@ -155,13 +159,18 @@ public class DangKyForm extends javax.swing.JFrame {
                 lbDangNhapMouseExited(evt);
             }
         });
-        btnDangNhap.add(lbDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 190, 50));
+        btnDangNhap.add(lbDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 170, 50));
 
-        getContentPane().add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 475, 170, 50));
+        getContentPane().add(btnDangNhap, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 480, 170, 50));
 
         lbTenNguoiDung.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
         lbTenNguoiDung.setForeground(new java.awt.Color(51, 51, 51));
         lbTenNguoiDung.setText("Tên Người Dùng");
+        lbTenNguoiDung.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lbTenNguoiDungKeyPressed(evt);
+            }
+        });
         getContentPane().add(lbTenNguoiDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 190, 30));
 
         tfTenNguoiDung.setBackground(new java.awt.Color(51, 51, 51));
@@ -193,6 +202,15 @@ public class DangKyForm extends javax.swing.JFrame {
         lbNgaySinh.setForeground(new java.awt.Color(51, 51, 51));
         lbNgaySinh.setText("Ngày Sinh");
         getContentPane().add(lbNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 190, 30));
+
+        tfNgaySinh.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        tfNgaySinh.setDoubleBuffered(true);
+        tfNgaySinh.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        tfNgaySinh.setMaximumSize(new java.awt.Dimension(190, 40));
+        tfNgaySinh.setMinimumSize(new java.awt.Dimension(190, 40));
+        tfNgaySinh.setNextFocusableComponent(tfTaiKhoan);
+        tfNgaySinh.setPreferredSize(new java.awt.Dimension(190, 40));
+        getContentPane().add(tfNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 190, 40));
 
         tfTaiKhoan.setBackground(new java.awt.Color(51, 51, 51));
         tfTaiKhoan.setFont(new java.awt.Font("SansSerif", 0, 16)); // NOI18N
@@ -230,11 +248,6 @@ public class DangKyForm extends javax.swing.JFrame {
         tfMatKhau.setBorder(null);
         tfMatKhau.setNextFocusableComponent(tfXNMatKhau);
         tfMatKhau.setOpaque(false);
-        tfMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfMatKhauActionPerformed(evt);
-            }
-        });
         getContentPane().add(tfMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 290, 35));
 
         tfXNMatKhau.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -242,36 +255,7 @@ public class DangKyForm extends javax.swing.JFrame {
         tfXNMatKhau.setBorder(null);
         tfXNMatKhau.setNextFocusableComponent(lbXacNhanMatKhau);
         tfXNMatKhau.setOpaque(false);
-        tfXNMatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfXNMatKhauActionPerformed(evt);
-            }
-        });
         getContentPane().add(tfXNMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 290, 35));
-
-        tfNgaySinh.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        tfNgaySinh.setDoubleBuffered(true);
-        tfNgaySinh.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
-        tfNgaySinh.setMaximumSize(new java.awt.Dimension(190, 40));
-        tfNgaySinh.setMinimumSize(new java.awt.Dimension(190, 40));
-        tfNgaySinh.setNextFocusableComponent(tfTaiKhoan);
-        tfNgaySinh.setPreferredSize(new java.awt.Dimension(190, 40));
-        getContentPane().add(tfNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, 190, 40));
-
-        btnMinimize.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        btnMinimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png"))); // NOI18N
-        btnMinimize.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMinimizeMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnMinimizeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnMinimizeMouseExited(evt);
-            }
-        });
-        getContentPane().add(btnMinimize, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 40, 40));
 
         lbBackground.setBackground(new java.awt.Color(255, 255, 255));
         lbBackground.setFont(new java.awt.Font("SansSerif", 1, 16)); // NOI18N
@@ -311,104 +295,45 @@ public class DangKyForm extends javax.swing.JFrame {
         return true;
     }
 
-    //sự kiện click vào thì thoát chương trình
-    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
-        // TODO add your handling code here:
-        this.dispose();
-        this.disable();
-    }//GEN-LAST:event_btnCloseMouseClicked
-
-    //sự kiện click vào thì màn hình đăng nhập minimize
-    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
-        // TODO add your handling code here:
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DangNhapForm().setVisible(true);
-            }
-        });
-        this.dispose();
-        this.disable();
-    }//GEN-LAST:event_btnBackMouseClicked
-
-    //sự kiện đưa chuột vào btnClose
-    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
-        // TODO add your handling code here:
-        btnClose.setOpaque(true);
-        btnClose.setBackground(new Color(213, 208, 208));
-
-    }//GEN-LAST:event_btnCloseMouseEntered
-
-    //sự kiện đưa chuột ra khỏi btnClose
-    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
-        // TODO add your handling code here:
-        btnClose.setOpaque(false);
-        btnClose.setBackground(new Color(255, 255, 255));
-    }//GEN-LAST:event_btnCloseMouseExited
-
-    //sự kiện đưa chuột vào btnMinimize
-    private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
-        // TODO add your handling code here:
-        btnBack.setOpaque(true);
-        btnBack.setBackground(new Color(213, 208, 208));
-    }//GEN-LAST:event_btnBackMouseEntered
-    //sự kiện đưa chuột vào btnMinimize
-    private void btnBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseExited
-        // TODO add your handling code here:
-        btnBack.setOpaque(false);
-        btnBack.setBackground(new Color(255, 255, 255));
-    }//GEN-LAST:event_btnBackMouseExited
-
-    //sự kiện đưa chuột vào btn đăng nhập
-    private void btnDangNhapMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseEntered
-        // TODO add your handling code here:
-        lbDangNhap.setForeground(new Color(102, 102, 102));
-        btnDangNhap.setkEndColor(new Color(102, 102, 102));
-        btnDangNhap.setkStartColor(new Color(255, 255, 255));
-        btnDangNhap.setkFillBackground(true);
-
-    }//GEN-LAST:event_btnDangNhapMouseEntered
-    //sự kiện đưa chuột ra khỏi btn đăng nhập
-    private void btnDangNhapMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangNhapMouseExited
-        // TODO add your handling code here:
-        lbDangNhap.setForeground(new Color(51, 51, 51));
-        btnDangNhap.setkEndColor(new Color(255, 255, 255));
-        btnDangNhap.setkStartColor(new Color(102, 102, 102));
-        btnDangNhap.setkFillBackground(false);
-
-    }//GEN-LAST:event_btnDangNhapMouseExited
+// <editor-fold defaultstate="collapsed" desc="Button Đăng Ký"> 
     //sự kiện khi click chuột đăng nhập
     private void lbDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangNhapMouseClicked
-        if (checkRong()) {
-            Client client = new Client();
-            TaiKhoan taiKhoan = new TaiKhoan(tfTaiKhoan.getText(), tfMatKhau.getText());
-            ThongTin thongTin = new ThongTin(tfTenNguoiDung.getText(), tfEmail.getText(), new java.sql.Date(tfNgaySinh.getDate().getTime()));
-            String[] messReponse = client.guiNguoiDungMoi(taiKhoan, thongTin);
-            String thongBao = "";
-            for (String s : messReponse) {
-                switch (s) {
-                    case "trung_taikhoan":
-                        thongBao += "Tài Khoản Đã Tồn Tại \n";
-                        break;
-                    case "trung_email":
-                        thongBao += "Email Đã Có Người Sử Dụng \n";
-                        break;
-                    case "fail":
-                        thongBao += "Đăng Ký Không Thành Công Mời Bạn Thử Lại \n";
-                        break;
-                    default:
-                        break;
-                    case "success":
-                        JOptionPane.showMessageDialog(null, "Đăng Ký Thành Công", "Đăng Ký", JOptionPane.INFORMATION_MESSAGE);
-                        java.awt.EventQueue.invokeLater(new Runnable() {
-                            public void run() {
-                                new DangNhapForm().setVisible(true);
-                            }
-                        });
-                        this.dispose();
-                        this.disable();
+        Client client = new Client();
+        if (client.serverAlive) {
+            if (checkRong()) {
+
+                TaiKhoan taiKhoan = new TaiKhoan(tfTaiKhoan.getText(), tfMatKhau.getText());
+                ThongTin thongTin = new ThongTin(tfTenNguoiDung.getText(), tfEmail.getText(), new java.sql.Date(tfNgaySinh.getDate().getTime()));
+                String[] messReponse = client.guiNguoiDungMoi(taiKhoan, thongTin);
+                String thongBao = "";
+                for (String s : messReponse) {
+                    switch (s) {
+                        case "trung_taikhoan":
+                            thongBao += "Tài Khoản Đã Tồn Tại \n";
+                            break;
+                        case "trung_email":
+                            thongBao += "Email Đã Có Người Sử Dụng \n";
+                            break;
+                        case "fail":
+                            thongBao += "Đăng Ký Không Thành Công Mời Bạn Thử Lại \n";
+                            break;
+                        default:
+                            break;
+                        case "success":
+                            JOptionPane.showMessageDialog(null, "Đăng Ký Thành Công", "Đăng Ký", JOptionPane.INFORMATION_MESSAGE);
+                            java.awt.EventQueue.invokeLater(new Runnable() {
+                                public void run() {
+                                    new DangNhapForm().setVisible(true);
+                                }
+                            });
+                            this.dispose();
+                            this.disable();
+                    }
                 }
+                lbThongBao.setText(thongBao);
             }
-            lbThongBao.setText(thongBao);
+        } else {
+            JOptionPane.showMessageDialog(null, "Không Thể Kết Nối Đến Máy Chủ", "Lỗi Kết Nối", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_lbDangNhapMouseClicked
 
@@ -427,29 +352,8 @@ public class DangKyForm extends javax.swing.JFrame {
         btnDangNhap.setkStartColor(new Color(102, 102, 102));
         btnDangNhap.setkFillBackground(false);
     }//GEN-LAST:event_lbDangNhapMouseExited
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-//        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
-//            String val = i + "";
-//            float f = Float.valueOf(val);
-//            this.setOpacity(f);
-//            try {
-//                Thread.sleep(50);
-//            } catch (Exception e) {
-//
-//            }
-//        }
-    }//GEN-LAST:event_formWindowOpened
-
-    private void tfMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfMatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfMatKhauActionPerformed
-
-    private void tfXNMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfXNMatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfXNMatKhauActionPerformed
-
+    // </editor-fold> //done
+// <editor-fold defaultstate="collapsed" desc="Button Thu nhỏ cửa sổ"> 
     private void btnMinimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizeMouseClicked
         // TODO add your handling code here:
         this.setState(this.ICONIFIED);
@@ -466,42 +370,54 @@ public class DangKyForm extends javax.swing.JFrame {
         btnMinimize.setOpaque(false);
         btnMinimize.setBackground(new Color(255, 255, 255));
     }//GEN-LAST:event_btnMinimizeMouseExited
+// </editor-fold> //done
+// <editor-fold defaultstate="collapsed" desc="Button Tắt Cửa Sổ"> 
+    private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        this.disable();
+    }//GEN-LAST:event_btnCloseMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DangKyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DangKyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DangKyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DangKyForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void btnCloseMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseEntered
+        // TODO add your handling code here:
+        btnClose.setOpaque(true);
+        btnClose.setBackground(new Color(213, 208, 208));
+    }//GEN-LAST:event_btnCloseMouseEntered
 
-        /* Create and display the form */
+    private void btnCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseExited
+        // TODO add your handling code here:
+        btnClose.setOpaque(false);
+        btnClose.setBackground(new Color(255, 255, 255));
+    }//GEN-LAST:event_btnCloseMouseExited
+    // </editor-fold> //done
+// <editor-fold defaultstate="collapsed" desc="Button Quay lại Đăng Nhập">    
+    private void btnBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseClicked
+        // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangKyForm().setVisible(true);
+                new DangNhapForm().setVisible(true);
             }
         });
-    }
+        this.dispose();
+        this.disable();
+    }//GEN-LAST:event_btnBackMouseClicked
+
+    private void btnBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseEntered
+        // TODO add your handling code here:
+        btnBack.setOpaque(true);
+        btnBack.setBackground(new Color(213, 208, 208));
+    }//GEN-LAST:event_btnBackMouseEntered
+
+    private void btnBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackMouseExited
+        // TODO add your handling code here:
+        btnBack.setOpaque(false);
+        btnBack.setBackground(new Color(255, 255, 255));
+    }//GEN-LAST:event_btnBackMouseExited
+// </editor-fold> //done
+    private void lbTenNguoiDungKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbTenNguoiDungKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbTenNguoiDungKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBack;
