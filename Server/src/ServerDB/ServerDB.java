@@ -53,7 +53,6 @@ public class ServerDB {
                     dsha.add(ha);
                 }
             }
-            System.out.println("Nhận List thành công");
         } catch (Exception e) {
             System.out.println("Nhân list hình ảnh không thành công");
         } finally {
@@ -96,7 +95,7 @@ public class ServerDB {
         return success;
     }
 
-    public boolean xoaAnh(String id, String idAnh) {
+    public boolean deleteAnh(String id, String idAnh) {
         connection = new ConnectionDB();
         boolean success = connection.sqlUpdate("DELETE FROM hinh_anh WHERE ha_id = '" + idAnh + "' AND user_id='" + id + "';");
         connection.closeConnect();
@@ -140,7 +139,7 @@ public class ServerDB {
         return false;
     }
 
-    public boolean themNguoiDung(ThongTin thongTin) {
+    public boolean addNguoiDung(ThongTin thongTin) {
         connection = new ConnectionDB();
 
         Boolean success = connection.sqlUpdate("INSERT INTO `user` (`user_id`, `user_name`, `user_birth`, `user_email`, `user_dungluong`) VALUES ('"
@@ -153,7 +152,7 @@ public class ServerDB {
         return success;
     }
 
-    public boolean themTaiKhoan(TaiKhoan taiKhoan) {
+    public boolean addTaiKhoan(TaiKhoan taiKhoan) {
         connection = new ConnectionDB();
         Boolean success = connection.sqlUpdate("INSERT INTO `tai_khoan` (`user_id`, `tk_username`, `tk_password`) VALUES ('"
                 + taiKhoan.getIdUser() + "','"

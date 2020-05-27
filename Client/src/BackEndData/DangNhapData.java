@@ -28,17 +28,17 @@ public class DangNhapData {
         this.socket = socket;
     }
 
-    public String checkDangNhap() {
+    public String kiemTraDangNhap() {
         String data = taiKhoan + "$" + matKhau;
         String id = null;
-        if (sendDataCheck(data) ) {
-            id = getDataCheck();
+        if (guiData(data) ) {
+            id = layData();
             return id;
         }
         return id;
     }
 
-    private boolean sendDataCheck(String data) {
+    private boolean guiData(String data) {
         try {
             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
 
@@ -52,7 +52,7 @@ public class DangNhapData {
 
     }
 
-    private String getDataCheck() {
+    private String layData() {
         ObjectInputStream input = null;
         String id = null ;
         try {

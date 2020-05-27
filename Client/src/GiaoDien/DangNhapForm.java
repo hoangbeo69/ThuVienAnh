@@ -6,18 +6,11 @@
 package GiaoDien;
 
 import Client.Client;
-import GiaoDien.MainControl;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
-//import java.awt.event.MouseEvent;
-//import java.awt.event.MouseListener;
-//import javax.swing.JLabel;
-//import javax.swing.JOptionPane;
-//import javax.swing.JPanel;
-//import org.w3c.dom.css.RGBColor;
 
 /**
  *
@@ -248,19 +241,20 @@ public class DangNhapForm extends javax.swing.JFrame {
 //sự kiện khi click chuột đăng nhập
     private void lbDangNhapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbDangNhapMouseClicked
         // TODO add your handling code here:
-        final String taiKhoan = tfTaiKhoan.getText();
-        final String matKhau = tfMatKhau.getText();
-        if (client.serverAlive) {
-            if (taiKhoan.equals("") || matKhau.equals("")) {
+        final String taiKhoan = tfTaiKhoan.getText();  //lấy dữ liệu từ textfield
+        final String matKhau = tfMatKhau.getText();   //lấy dữ liệu từ textfield
+        if (client.serverAlive) {  //check xem server có đang được kết nối hay không
+            if (taiKhoan.equals("") || matKhau.equals("")) {  //check rỗng
                 lbThongBaoDangNhap.setText("Tài khoản hoặc mật khẩu không được để trống");
                 this.validate();
             } else {
-                this.setCursor(Cursor.WAIT_CURSOR);
+                this.setCursor(Cursor.WAIT_CURSOR);  //đổi con trỏ chuột thành vòng tròn đợi
                 String id = null;
-                if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {
+                if (!(id = client.dangNhap(taiKhoan, matKhau)).equals("null")) {  //kiểm tra kết quả đăng nhập
                     this.setCursor(Cursor.DEFAULT_CURSOR);
                     lbThongBaoDangNhap.setText("");
                     final String idTaiKhoan = id;
+                    //chạy giao diện chính
                     java.awt.EventQueue.invokeLater(new Runnable() {
                         @Override
                         public void run() {
@@ -269,7 +263,7 @@ public class DangNhapForm extends javax.swing.JFrame {
                             main.setVisible(true);
                         }
                     });
-
+                    //thoát form đăng nhập
                     this.dispose();
                     this.setVisible(false);
                 } else {
@@ -318,7 +312,7 @@ public class DangNhapForm extends javax.swing.JFrame {
         this.setState(this.ICONIFIED);
     }//GEN-LAST:event_btnMinimizeMouseClicked
     // </editor-fold> //done
-
+    //tạo hiệu ứng khi mở form lên thì sẽ dần dần hiện rõ
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         for (double i = 0.0; i <= 1.0; i = i + 0.1) {

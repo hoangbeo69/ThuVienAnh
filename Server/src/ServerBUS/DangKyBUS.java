@@ -52,7 +52,7 @@ public class DangKyBUS {
             boolean checkTaiKhoan = serverDb.checkTaiKhoan(taiKhoan.getTaiKhoan());
             boolean checkEmail = serverDb.checkEmail(thongTin.getEmail());
             if (checkEmail && checkTaiKhoan) {
-                if (serverDb.themNguoiDung(thongTin) && serverDb.themTaiKhoan(taiKhoan)) {
+                if (serverDb.addNguoiDung(thongTin) && serverDb.addTaiKhoan(taiKhoan)) {
                     outputStream.writeUTF("success");
                     return true;
                 } else {
@@ -70,6 +70,7 @@ public class DangKyBUS {
                 }
                 outputStream.writeUTF(mess);
             }
+            outputStream.flush();
         } catch (IOException ex) {
             Logger.getLogger(DangKyBUS.class.getName()).log(Level.SEVERE, null, ex);
         }

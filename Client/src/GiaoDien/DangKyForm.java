@@ -14,10 +14,6 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-//import java.util.Arrays;
-//import java.util.Date;
-//import javax.swing.ImageIcon;
-//import java.awt.Cursor;
 
 /**
  *
@@ -146,7 +142,7 @@ public class DangKyForm extends javax.swing.JFrame {
         lbDangNhap.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
         lbDangNhap.setForeground(new java.awt.Color(51, 51, 51));
         lbDangNhap.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbDangNhap.setText("Đăng Nhập");
+        lbDangNhap.setText("Đăng Ký");
         lbDangNhap.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lbDangNhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -50,7 +50,7 @@ public class XoaAnhBUS {
             try {
                 output = new DataOutputStream(socket.getOutputStream());
                 try {
-                    if (serverDB.xoaAnh(this.id, this.idAnh)) {
+                    if (serverDB.deleteAnh(this.id, this.idAnh)) {
                         output.writeUTF("success");
                     }
                 } catch (IOException ex) {
@@ -58,6 +58,7 @@ public class XoaAnhBUS {
                     
                     Logger.getLogger(XoaAnhBUS.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                output.flush();
             } catch (IOException ex) {
                     Logger.getLogger(XoaAnhBUS.class.getName()).log(Level.SEVERE, null, ex);
             } 

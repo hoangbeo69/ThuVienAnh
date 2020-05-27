@@ -22,36 +22,38 @@ public class DangNhapBUS {
     private String taiKhoan;
     private String matKhau;
     Socket socket;
+
     public DangNhapBUS(Socket socket) {
         this.socket = socket;
     }
-    public boolean layDuLieuClient(){
+
+    public boolean layDuLieuClient() {
         try {
             ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
             byte[] byteRead = new byte[1024];
-            input.read(byteRead,0,byteRead.length);
-            String[] data = new String(byteRead).trim().split("\\$");
+            input.read(byteRead, 0, byteRead.length);
+            String[] data = new String(byteRead).trim().split("\\$"); // nhận dữ liệu từ client
             taiKhoan = data[0];
             matKhau = data[1];
-            System.out.println(taiKhoan + matKhau);
-            return  true;
         } catch (IOException ex) {
             Logger.getLogger(DangNhapBUS.class.getName()).log(Level.SEVERE, null, ex);
-            return  false;
+            return false;
         }
+        return true;
     }
-    public boolean traDulieuClient(){
+
+    public boolean traDulieuClient() {
         ObjectOutputStream output = null;
         try {
             ServerDB serverDb = new ServerDB();
-            String id = serverDb.checkDangNhap(taiKhoan,matKhau);
-            output = new ObjectOutputStream(socket.getOutputStream());
-            output.write(id.getBytes(),0,id.getBytes().length);
+            String id = serverDb.checkDangNhap(taiKhoan, matKhau);  //check tài khoản ,mật khẩu từ database
+            output = new ObjectOutputStream(socket.getOutputStream()); 
+            output.write(id.getBytes(), 0, id.getBytes().length);   //gửi trả kết quả đến client
             output.flush();
             return true;
         } catch (IOException ex) {
             Logger.getLogger(DangNhapBUS.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        } 
+        }
     }
 }

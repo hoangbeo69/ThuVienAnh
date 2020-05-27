@@ -69,7 +69,7 @@ public class MainControl extends javax.swing.JFrame {
         this.setBackground(new Color(0, 0, 0, 0));
 
         lbTenTaiKhoan.setText(taiKhoan.substring(0, 1).toUpperCase() + taiKhoan.substring(1)); //set tên tài khoản vào lbTenTaiKhoan
-        danhSachAnh = client.getDanhSachAnh(); //nhận danh sách ảnh từ server
+        danhSachAnh = client.layDanhSachAnh(); //nhận danh sách ảnh từ server
         if (danhSachAnh.size() != 0) {
             setDungLuong();
             sortFirstList();
@@ -142,9 +142,8 @@ public class MainControl extends javax.swing.JFrame {
 
         @Override
         public void run() {
-            byte[] data = client.getHinhAnh(hap.getIdAnh()); //lấy byte data của image
+            byte[] data = client.layHinhAnh(hap.getIdAnh()); //lấy byte data của image
             if (data.length != 0) {
-                data = client.getHinhAnh(hap.getIdAnh());
                 hap.setImageDisplay(data);
                 hap.validate();
             } else {
@@ -163,7 +162,7 @@ public class MainControl extends javax.swing.JFrame {
     //Xóa 1 ảnh 
     static boolean deleteImage(String idAnh) {
         if (client.xoaHinhAnh(idAnh)) {
-            setDanhSachAnh(client.getDanhSachAnh());
+            setDanhSachAnh(client.layDanhSachAnh());
             return true;
 
         } else {
@@ -620,7 +619,7 @@ public class MainControl extends javax.swing.JFrame {
                 this.setOpacity(0.95f);
                 JOptionPane.showMessageDialog(null, "Lưu Ảnh Mới Thành Công", "Lưu Ảnh", JOptionPane.INFORMATION_MESSAGE);
                 this.setOpacity(1f);
-                danhSachAnh = client.getDanhSachAnh();
+                danhSachAnh = client.layDanhSachAnh();
                 DisplayFirstPageImage();
             } else {
                 this.setOpacity(0.95f);

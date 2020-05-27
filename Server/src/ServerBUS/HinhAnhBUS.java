@@ -59,11 +59,12 @@ public class HinhAnhBUS {
 
             outputMess = new DataOutputStream(socket.getOutputStream());
             outputMess.writeUTF(""+dataImageSend.length);
+            outputMess.flush();
             outputFile = new ObjectOutputStream(socket.getOutputStream());
             outputFile.write(dataImageSend, 0, dataImageSend.length);
             outputFile.flush();
 
-            System.out.println("Gửi " + filePath + " thành công");
+//            System.out.println("Gửi " + filePath + " thành công");
         } catch (IOException ex) {
             Logger.getLogger(HinhAnhBUS.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,7 +77,7 @@ public class HinhAnhBUS {
 
             BufferedInputStream input = new BufferedInputStream(new FileInputStream(file));
             byte[] data = new byte[(int) file.length()];
-            int x =input.read(data, 0, data.length);
+            input.read(data, 0, data.length);
             input.close();
             return data;
         } catch (IOException ex) {

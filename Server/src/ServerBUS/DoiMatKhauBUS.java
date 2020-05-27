@@ -56,6 +56,7 @@ public class DoiMatKhauBUS {
                     output.writeUTF("fail");
                 }
             }
+            output.flush();
         } catch (IOException ex) {
             Logger.getLogger(DoiMatKhauBUS.class.getName()).log(Level.SEVERE, null, ex);
         } 

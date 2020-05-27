@@ -237,13 +237,15 @@ public class HinhAnhPanel extends keeptoo.KGradientPanel {
             BufferedOutputStream output = new BufferedOutputStream(new FileOutputStream(new File(path)));
             output.write(arrayImage, 0, arrayImage.length);
             output.close();
-            return true;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(HinhAnhPanel.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         } catch (IOException ex) {
             Logger.getLogger(HinhAnhPanel.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return false;
+        return true;
+        
     }
 
     public String getName() {

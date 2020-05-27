@@ -51,7 +51,7 @@ public class ConnectionDB {
             String url = "jdbc:mysql://" + ipAddress + "/" + DB_Name + "?useUnicode=true&characterEncoding=UTF-8";
             conn = DriverManager.getConnection(url, User_Name, User_Pass);
             stmt = conn.createStatement();
-            System.out.println("**\n Success! Đã kết nối tới '" + DB_Name + "'");
+//            System.out.println("**\n Success! Đã kết nối tới '" + DB_Name + "'");
 
         } catch (SQLException e) {
             System.err.println("-- ERROR! Không thể kết nối tới '" + DB_Name + "'");
@@ -63,7 +63,7 @@ public class ConnectionDB {
         if (checkConnect()) {
             try {
                 rset = stmt.executeQuery(qry);
-                System.out.println("Success Query !!! " + qry);
+//                System.out.println("Success Query !!! " + qry);
                 return rset;
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -78,7 +78,7 @@ public class ConnectionDB {
         if (checkConnect()) {
             try {
                 stmt.executeUpdate(qry);
-                System.out.println("Success Update Query " + qry);
+//                System.out.println("Success Update Query " + qry);
                 return true;
             } catch (SQLException ex) {
                 System.err.println("-- ERROR! không thể update '" + DB_Name + "'");
@@ -98,7 +98,7 @@ public class ConnectionDB {
             if (stmt != null) {
                 stmt.close();
             }
-            System.out.println("Success! Đóng kết nối tới '" + DB_Name + "' thành công.\n**");
+//            System.out.println("Success! Đóng kết nối tới '" + DB_Name + "' thành công.\n**");
         } catch (SQLException ex) {
 //            JOptionPane.showMessageDialog(null, "-- ERROR! Không thể đóng kết nối tới " + DB_Name + "\n" + ex.getLocalizedMessage());
         }

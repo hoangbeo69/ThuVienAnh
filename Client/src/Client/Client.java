@@ -57,11 +57,11 @@ public class Client {
         }
     }
 
-    //hàm gửi tài khoản mật khẩu về server
+    //hàm gửi tài khoản mật khẩu về server để đăng nhập
     public String dangNhap(String taiKhoan, String matKhau) {
-        if (sendMessToServer("dang_nhap")) {
+        if (sendMessToServer("dang_nhap")) { //gửi yêu cầu đăng nhập đến server
             String id = null;
-            if ((id = new DangNhapData(socket, taiKhoan, matKhau).checkDangNhap()) != null) {
+            if ((id = new DangNhapData(socket, taiKhoan, matKhau).kiemTraDangNhap()) != null) {
                 this.userID = id;
                 return id;
             }
@@ -71,7 +71,7 @@ public class Client {
     }
 
     //hàm lấy danh sách ảnh từ server
-    public ArrayList<HinhAnh> getDanhSachAnh() {
+    public ArrayList<HinhAnh> layDanhSachAnh() {
         ArrayList<HinhAnh> dsha = null;
         if (sendMessToServer("gui_list_anh")) {
             ListHinhAnhData lha = new ListHinhAnhData(userID, socket);
@@ -84,7 +84,7 @@ public class Client {
     }
 
     // hàm lấy ảnh từ server
-    synchronized public byte[] getHinhAnh(String idAnh) {
+    synchronized public byte[] layHinhAnh(String idAnh) {
         byte[] data = null;
         if (sendMessToServer("gui_anh")) {
             HinhAnhData had = new HinhAnhData(userID, idAnh, socket);
@@ -136,7 +136,7 @@ public class Client {
         }
         return result;
     }
-
+    // hàm đổi mật khẩu
     public String doiMatKhau(TaiKhoan taiKhoan, String matKhauMoi) {
         String result = null;
         if (sendMessToServer("doi_mat_khau")) {
@@ -147,7 +147,7 @@ public class Client {
         }
         return result;
     }
-
+    //hàm đổi thông tin
     public String doiThongTin(ThongTin thongTin) {
         String result = null;
         if (sendMessToServer("doi_thong_tin")) {
