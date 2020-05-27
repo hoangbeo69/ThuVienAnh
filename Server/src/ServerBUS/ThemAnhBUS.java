@@ -37,10 +37,14 @@ public class ThemAnhBUS {
             DataInputStream input = new DataInputStream(socket.getInputStream());
             String data = input.readUTF();
             String[] dataArray = data.split("\\$");
+            
             HinhAnh ha = new HinhAnh(dataArray[1], dataArray[2], Integer.parseInt(dataArray[3]), java.sql.Date.valueOf(dataArray[4]));
+            
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
             byte[] dataRead = new byte[ha.getDungluong()];
+            
             inputStream.readNBytes(dataRead, 0, dataRead.length);
+            
             String pathFile = null;
             if ((pathFile = saveFile(dataRead, ha.getName())) != null) {
 
