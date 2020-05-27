@@ -41,7 +41,7 @@ public class DangKyForm extends javax.swing.JFrame {
         tfNgaySinh.getEditor().setOpaque(false);
         JButton btn_pick = (JButton) tfNgaySinh.getComponent(1);
         btn_pick.setOpaque(false);
-        btn_pick.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/minus_math_30px.png")));
+        btn_pick.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ImageGiaoDien/icons8_calendar_35px_1.png")));
 
     }
 
