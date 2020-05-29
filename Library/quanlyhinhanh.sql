@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th5 29, 2020 lúc 06:08 AM
+-- Thời gian đã tạo: Th5 29, 2020 lúc 06:13 AM
 -- Phiên bản máy phục vụ: 10.3.16-MariaDB
 -- Phiên bản PHP: 7.3.7
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `quanlyhinhanh`
 --
+CREATE DATABASE IF NOT EXISTS `quanlyhinhanh` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `quanlyhinhanh`;
 
 -- --------------------------------------------------------
 
@@ -28,13 +30,15 @@ SET time_zone = "+00:00";
 -- Cấu trúc bảng cho bảng `hinh_anh`
 --
 
-CREATE TABLE `hinh_anh` (
+CREATE TABLE IF NOT EXISTS `hinh_anh` (
   `ha_id` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `ha_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `ha_filepath` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `ha_dungluong` int(11) NOT NULL,
   `user_id` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `ha_date` date NOT NULL
+  `ha_date` date NOT NULL,
+  PRIMARY KEY (`ha_id`),
+  KEY `khoangoai2` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -72,10 +76,12 @@ INSERT INTO `hinh_anh` (`ha_id`, `ha_name`, `ha_filepath`, `ha_dungluong`, `user
 -- Cấu trúc bảng cho bảng `tai_khoan`
 --
 
-CREATE TABLE `tai_khoan` (
+CREATE TABLE IF NOT EXISTS `tai_khoan` (
   `user_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `tk_username` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `tk_password` varchar(45) COLLATE utf8_unicode_ci NOT NULL
+  `tk_password` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `tk_username` (`tk_username`),
+  KEY `khoangoai1` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -94,12 +100,14 @@ INSERT INTO `tai_khoan` (`user_id`, `tk_username`, `tk_password`) VALUES
 -- Cấu trúc bảng cho bảng `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
   `user_id` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   `user_name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `user_birth` date NOT NULL,
   `user_email` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `user_dungluong` int(11) NOT NULL
+  `user_dungluong` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_email` (`user_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -111,31 +119,6 @@ INSERT INTO `user` (`user_id`, `user_name`, `user_birth`, `user_email`, `user_du
 ('USER02', 'Lưu Tiếng Dũng', '1999-09-22', 'luutiengdung@gmail.com', 104857600),
 ('USER03', 'Nguyễn Tiến Tùng', '1999-02-06', 'nguyentientung@gmail.com', 104857600),
 ('USER5699', 'Nguyễn Văn A', '1999-09-23', 'nguyenvana@gmail.com', 104857600);
-
---
--- Chỉ mục cho các bảng đã đổ
---
-
---
--- Chỉ mục cho bảng `hinh_anh`
---
-ALTER TABLE `hinh_anh`
-  ADD PRIMARY KEY (`ha_id`),
-  ADD KEY `khoangoai2` (`user_id`);
-
---
--- Chỉ mục cho bảng `tai_khoan`
---
-ALTER TABLE `tai_khoan`
-  ADD UNIQUE KEY `tk_username` (`tk_username`),
-  ADD KEY `khoangoai1` (`user_id`);
-
---
--- Chỉ mục cho bảng `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `user_email` (`user_email`);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
