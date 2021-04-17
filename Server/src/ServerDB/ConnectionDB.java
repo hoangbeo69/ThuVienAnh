@@ -34,7 +34,7 @@ public class ConnectionDB {
         checkDriver();
         DB_Name = "quanlyhinhanh";
         User_Name = "root";
-        User_Pass = "";
+        User_Pass = "password";
         setupConnect();
     }
 
