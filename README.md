@@ -8,10 +8,26 @@
 - Các tài khoản mặc định : ( hoangbeo69,hoangbeo69),(tientung,tientung),(tiendung,tiendung)
 
 **Một số hình ảnh về giao diện**
-- Giao Diện Đăng Nhập
+## Giao Diện Đăng Nhập
 
-<img src="https://i.imgur.com/L4DQ6ZV.png">
+![alt text](https://github.com/hoangbeo69/ThuVienAnh/blob/master/ScreenShot/DangNhap.png)
 
-- Giao Diện Chính
+## Giao Diện Chính
 
-<img src="https://i.imgur.com/AqXzIq5.png">
+![alt text](https://github.com/hoangbeo69/ThuVienAnh/blob/master/ScreenShot/GiaoDienChinh.png)
+
+## Phóng To
+
+![alt text](https://github.com/hoangbeo69/ThuVienAnh/blob/master/ScreenShot/Phongto.png)
+
+## Page Cuoi
+
+![alt text](https://github.com/hoangbeo69/ThuVienAnh/blob/master/ScreenShot/PageCuoi.png)
+
+## Thêm Ảnh Mới
+
+![alt text](https://github.com/hoangbeo69/ThuVienAnh/blob/master/ScreenShot/ThemAnhMoi.png)
+
+## Chỉnh Sửa Thông Tin
+
+![alt text](https://github.com/hoangbeo69/ThuVienAnh/blob/master/ScreenShot/ChinhSuaThongTin.png)
